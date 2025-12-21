@@ -1,0 +1,42 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+main > form {
+    background-color: var(--pure-white);
+    border: var(--border);
+    height: 20rem;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > form > .text-condensed {
+    margin: 3rem 0 1.5rem;
+}
+
+main > form > .input-group {
+    margin: auto 0 1rem;
+    padding: 0 .5rem;
+    width: 100%;
+}
+
+main > form > .input-group > input[type="text"] {
+    background-color: var(--white);
+}
+
+main > form > .submit {
+    margin-top: auto;
+    width: 100%;
+}
+
+@media all and (max-width:412px) {
+    main > form {
+        width: 20rem;
+    }
+    
+}

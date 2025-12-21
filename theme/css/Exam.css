@@ -1,0 +1,181 @@
+body {
+    border-left: var(--border);
+    border-right: var(--border);
+    margin: 0 auto;
+    max-width: 1600px;
+    position: relative;
+}
+
+/**
+ * Header and Progress
+ */
+header {
+    position:  sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-bottom: var(--border);
+    background-color: var(--white);
+    z-index: 10;
+}
+
+header > .timer-container {
+    display: flex;
+    align-items: center;
+    border-right: var(--border);
+}
+
+header > .timer-container > p {
+    padding-left: 1rem;
+}
+
+header > .progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+.progress-container > .progress {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.progress-container > .progress > .progress-bar {
+    height: 0.8rem;
+    margin-top: 0.5rem;
+    border: var(--border);
+    position: relative;
+}
+
+.progress-container > .progress > .progress-bar > .bar {
+    background-color: var(--gray);
+    width: 50%;
+    height: 100%;
+    position: absolute;
+}
+
+.progress-container > .progress >.questions-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+/**
+ * Questions and Answers
+ */
+main .question-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* border-bottom: var(--border); */
+    height: calc(100vh - 10rem);
+    /* padding-bottom: 5rem; */
+}
+
+main .question-container > .question {
+    border-right: var(--border);
+    padding: 1rem;
+}
+
+main .question-container > .question > .question-body {
+    padding: 1rem 2rem;
+}
+
+main .question-container > .question > .question-body > .image {
+    width: 100%;
+    margin-top: 2rem;
+    height: 100px;
+    background-color: var(--gray);
+}
+
+main .question-container > .answers {
+    padding: 1rem;
+    /* padding-bottom: 5rem; */
+}
+
+main .question-container > .answers > input {
+    display: none;
+}
+
+main .question-container > .answers > .option {
+    padding: 2rem 1rem 2rem 4rem;
+    border: var(--border);
+    border-radius: 10px;
+    background-color: var(--pure-white);
+    width: 100%;
+    display: block;
+    margin: 1rem 0;
+    position: relative;
+}
+
+main .question-container > .answers > .option:hover {
+    border-color: var(--black);
+}
+
+main .question-container > .answers > .option > .text-lg {
+    color: var(--gray);
+    display: block;
+    position: absolute;
+    left: 1rem;
+    top: 1.5rem;
+}
+
+main .question-container > .answers > input:checked + label {
+    border-color: var(--black);
+    background-color: var(--light-blue);
+}
+
+main .question-container > .answers > input:checked  + label > .text-lg {
+    color: var(--white);
+}
+
+main .question-container > .answers > button {
+    border: none;
+    background: none;
+    margin-top: 1rem;
+}
+
+/**
+ * FOoter and Question Nav
+*/
+footer {
+    background-color: var(--white);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    border-top: var(--border);
+    height: 5rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+footer > button.btn-primary:first-child {
+    background-color: transparent;
+    border: var(--border);
+}
+
+footer > nav {
+    height: 3rem;
+    width: 30rem;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+footer > nav > button.goto {
+    width: 2rem;
+    height: 2rem;
+    border: var(--border);
+    padding: 0.5rem 0;
+    margin: 0 0.25rem;
+    text-align: center;
+}

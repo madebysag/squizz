@@ -1,0 +1,98 @@
+:root {
+    --gray: #cccccc;
+    --text-gray: #aaaaaa;
+    --border: solid 1px #cccccc;
+    --white: #fcfcfc;
+    --pure-white: #ffffff;
+    --black: #222222;
+    --red: #FB4949;
+    --light-blue: #D7DDFB;
+    --blue: #7582C4;
+
+    font: 400 16px "Roboto", sans-serif;
+    color: var(--black);
+}
+
+* {
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+}
+
+body {
+    background-color: var(--white);
+}
+
+/**
+ * Text 
+ */
+.text-sm{
+    font-size: 1rem;
+}
+
+.text-md{
+    font-size: 1.125rem;
+}
+
+.text-lg{
+    font-size: 1.5rem;
+}
+
+.text-xl{
+    font-size: 2.485rem;
+}
+
+.text-xxl{
+    font-size: 3.5rem;
+}
+
+.text-condensed {
+    font-family: "Roboto Condensed";
+}
+
+.text-muted {
+    color: var(--text-gray);
+}
+
+/**
+ * Buttons
+ */
+.btn-primary {
+    background-color: var(--light-blue);
+    color: #222222;
+    padding: 1rem 3rem;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/**
+ * Form and Inputs
+ */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group > label {
+    margin-bottom: 0.5rem;
+}
+
+.input-group > input[type="text"],
+.input-group > input[type="password"] {
+    background-color: var(--pure-white);
+    border: var(--border);
+    font-size: 1.125rem;
+    padding: 0.8rem 1rem;
+}
+
+.input-group > .error {
+    color: var(--red);
+    font-size: 0.8rem;
+    padding: 0.2rem 0 0.5rem;
+}
