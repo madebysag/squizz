@@ -4,17 +4,19 @@ body {
     margin: 0 auto;
     max-width: 1600px;
     position: relative;
+    height: 100vh;
+    /* overflow: hidden; */
 }
 
 /**
  * Header and Progress
  */
 header {
-    position:  sticky;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 5rem;
+    height: 10vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     border-bottom: var(--border);
@@ -69,17 +71,27 @@ header > .progress-container {
 /**
  * Questions and Answers
  */
-main .question-container{
+main .question-container.active{
     display: grid;
+}
+
+main .question-container{
+    display: none;
+    position: absolute;
+    top: 10vh;
+    left: 0;
     grid-template-columns: repeat(2, 1fr);
+    height: 80vh;
+    /* height: calc(100vh - 20vh); */
     /* border-bottom: var(--border); */
-    height: calc(100vh - 10rem);
     /* padding-bottom: 5rem; */
 }
+
 
 main .question-container > .question {
     border-right: var(--border);
     padding: 1rem;
+    overflow-y: scroll;
 }
 
 main .question-container > .question > .question-body {
@@ -95,6 +107,7 @@ main .question-container > .question > .question-body > .image {
 
 main .question-container > .answers {
     padding: 1rem;
+    overflow-y: scroll;
     /* padding-bottom: 5rem; */
 }
 
@@ -145,18 +158,19 @@ main .question-container > .answers > button {
 */
 footer {
     background-color: var(--white);
-    position: sticky;
+    position: absolute;
     bottom: 0;
     left: 0;
     border-top: var(--border);
-    height: 5rem;
+    height: 10vh;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     gap: 1rem;
     justify-items: center;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem;
+    z-index: 10;
 }
 
 footer > button.btn-primary:first-child {
@@ -166,16 +180,69 @@ footer > button.btn-primary:first-child {
 
 footer > nav {
     height: 3rem;
-    width: 30rem;
+    width: 35vw;
     overflow-x: scroll;
     white-space: nowrap;
 }
 
-footer > nav > button.goto {
+button.goto {
     width: 2rem;
     height: 2rem;
     border: var(--border);
     padding: 0.5rem 0;
     margin: 0 0.25rem;
     text-align: center;
+    background-color: transparent;
+}
+
+button.goto:hover {
+    border-color: var(--black);
+}
+
+button.goto.active {
+    border-color: var(--black);
+    background-color: var(--light-blue);
+}
+
+
+/**
+ * Tab and Mobile Version
+*/
+
+@media all and (max-width: 768px) {
+    /* Header */
+    header {
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+    }
+
+    header > .timer-container {
+        grid-row: 2;
+    }
+
+    header > .timer-container > p {
+        text-align: center;
+        padding: 0;
+        width: 100%;
+        font-size: 2.125rem;
+    }
+
+    /* Question and Answers */
+    main .question-container {
+        grid-template-columns: 1fr;
+        /* height: calc(100vh - 25vh); */
+        height: 75vh;
+    }
+    
+    /* Footer and Question Nav */
+    footer {
+        height: 15vh;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    footer > nav {
+        grid-area: 1/1/1/3;
+        width: 50vw;
+    }
+
 }
