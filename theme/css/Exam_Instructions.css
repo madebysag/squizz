@@ -37,7 +37,7 @@ main > .submit {
     width: 35rem;
     padding: 1.5rem 3rem;
 }
-@media all and (max-width:425px) {
+@media all and (max-width:768px) {
     main > .exam-info,
     main > .submit{
         width: 20rem;

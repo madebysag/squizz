@@ -169,6 +169,7 @@ main .question-container > .answers > button {
     height: 100%;
     background-color: var(--white);
     z-index: 20;
+    overflow-y: auto;
 }
 
 section.finish-attempt {
@@ -184,7 +185,7 @@ section.finish-attempt >.confirmation > div {
 
 section.finish-attempt > nav.goto-questions {
     height: 35vh;
-    overflow: scroll;
+    overflow-y: auto;
     margin: 1rem 0;
 }
 
@@ -266,6 +267,7 @@ button.goto.active {
 
     header > .timer-container {
         grid-row: 2;
+        border-right: none;
     }
 
     header > .timer-container > p {
@@ -280,6 +282,10 @@ button.goto.active {
         grid-template-columns: 1fr;
         /* height: calc(100vh - 25vh); */
         height: 75vh;
+    }
+
+    main .question-container > section.question {
+        border-right: none;    
     }
     
     /* Footer and Question Nav */
