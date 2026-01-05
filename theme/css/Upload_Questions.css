@@ -144,7 +144,7 @@ aside > .tabs-container > .tabs-title > .btn-primary {
 }
 
 aside > .tabs-container > .tabs-title > .btn-primary.active {
-    border-bottom: 0.5rem solid var(--gray);
+    border-bottom: 0.3rem solid var(--black);
 }
 
 aside > .tabs-container > .tabs > div.active {

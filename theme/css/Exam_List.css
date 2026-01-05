@@ -1,0 +1,88 @@
+header {
+    display: flex;
+    height: 4rem;
+    padding: 0.5rem 2rem;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: var(--border);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+}
+
+aside {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 10rem;
+    height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0;
+    border-right: var(--border);
+}
+
+main {
+    position: absolute;
+    top: 4rem;
+    left: 10rem;
+    width: calc(100vw - 10rem);
+    height: calc(100vh - 4rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 9fr;
+
+}
+main > div {
+    /* width: 100%; */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+/* 
+ * Table Style
+*/
+
+table, thead, tbody, tr, th, td, table button {
+    font: 400 1rem "Roboto";
+}
+
+table {
+    /* border-collapse: collapse; */
+    border: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem;
+    border-spacing: 0px;
+    /* table-layout: fixed; */
+}
+
+thead > tr {
+    background-color: var(--pure-white);
+}
+
+th {
+    color: var(--text-gray);
+    font-family: "Roboto Condensed";
+    border-bottom: var(--border);
+}
+
+tr {
+    background-color: var(--white);
+    
+}
+
+tr:hover {
+    background-color: var(--pure-white);
+}
+
+td {
+    border-bottom: var(--border);
+    height: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
