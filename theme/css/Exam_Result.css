@@ -1,0 +1,110 @@
+header {
+    display: flex;
+    height: 4rem;
+    padding: 0.5rem 2rem;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: var(--border);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+}
+
+aside {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 10rem;
+    height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0;
+    border-right: var(--border);
+}
+
+aside > .btn-primary {
+    background-color: transparent;
+    color: var(--text-gray);
+    margin: 0.5rem 0;
+}
+
+aside > .btn-primary.active {
+    color: var(--black);
+    border-left: solid 0.5rem var(--blue);
+    font: 600 1rem "Roboto Condensed";
+}
+
+main {
+    position: absolute;
+    top: 4rem;
+    left: 10rem;
+    width: calc(100vw - 10rem);
+    height: calc(100vh - 4rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr 9fr;
+
+}
+main > div {
+    /* width: 100%; */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+main > div.text-condensed * {
+    font-family: "Robot Condensed", sans-serif;
+}
+
+/* 
+ * Table Style
+*/
+.table > * {
+    font: 400 1rem "Roboto";
+    color: var(--black);
+}
+
+.table {
+    border: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem;
+}
+
+.table .t-rows {
+    min-height: 3.5rem;
+    border-bottom: var(--border);
+    display: grid;
+    grid-template-columns: 3fr repeat(4, 1fr) 2fr;
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+}
+
+.table > .t-head > .t-rows {
+    font: 400 1rem "Roboto Condensed";    
+    background-color: var(--pure-white);
+    color: var(--text-gray);
+}
+
+.table > .t-head > .t-rows * {
+    color: var(--text-gray);
+}
+
+.table > .t-body {
+    overflow-y: auto;
+    height: calc(100% - 3.5rem);
+    padding-bottom: 1rem;
+}
+
+.table .t-rows > div {
+    padding: 0.3rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+

@@ -23,6 +23,18 @@ aside {
     border-right: var(--border);
 }
 
+aside > .btn-primary {
+    background-color: transparent;
+    color: var(--text-gray);
+    margin: 0.5rem 0;
+}
+
+aside > .btn-primary.active {
+    color: var(--black);
+    border-left: solid 0.5rem var(--blue);
+    font: 600 1rem "Roboto Condensed";
+}
+
 main {
     position: absolute;
     top: 4rem;
@@ -45,44 +57,49 @@ main > div {
 /* 
  * Table Style
 */
-
-table, thead, tbody, tr, th, td, table button {
+.table > * {
     font: 400 1rem "Roboto";
+    color: var(--black);
 }
 
-table {
-    /* border-collapse: collapse; */
+.table {
     border: var(--border);
     border-radius: 10px;
     overflow: hidden;
     margin: 1rem;
-    border-spacing: 0px;
-    /* table-layout: fixed; */
 }
 
-thead > tr {
+.table .t-rows {
+    min-height: 3.5rem;
+    border-bottom: var(--border);
+    display: grid;
+    grid-template-columns: 2fr repeat(6, 1fr);
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+}
+
+.table > .t-head > .t-rows {
+    font: 400 1rem "Roboto Condensed";    
     background-color: var(--pure-white);
 }
 
-th {
+.table > .t-head > .t-rows * {
     color: var(--text-gray);
-    font-family: "Roboto Condensed";
-    border-bottom: var(--border);
 }
 
-tr {
-    background-color: var(--white);
-    
+.table > .t-body {
+    overflow-y: auto;
+    height: calc(100% - 3.5rem);
+    padding-bottom: 1rem;
 }
 
-tr:hover {
-    background-color: var(--pure-white);
+.table .t-rows > div {
+    padding: 0.3rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
-td {
-    border-bottom: var(--border);
-    height: 100px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
 
