@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/Exam.css">
+    <script type="module" src="./js/Exam.index.js"></script>
     <title>Exam | </title>
 </head>
 <body>
 
     <header>
         <div class="timer-container">
-            <p class="timer text-condensed text-xl">14:05:23</p>
+            <p data-total-minutes="0" class="timer text-condensed text-xl">00:00:00</p>
         </div>
         <div class="progress-container">
 
@@ -35,7 +36,7 @@
 
         <form action="">
 
-            <div class="question-container active">
+            <div class="question-container active" id="question_1">
 
                 <section class="question">
                     <p class="number">
@@ -82,6 +83,100 @@
                 
             </div>
 
+            <div class="question-container" id="question_2">
+
+                <section class="question">
+                    <p class="number">
+                        <span class="text-muted">Question </span>
+                        <b class="md">2</b>
+                    </p>
+                    <div class="question-body">
+                        <p class="text md">What is the best Option in this regime?</p>
+                        <div class="image"><img src="" alt=""></div>
+                    </div>
+                        
+                </section>
+
+            
+                <section class="answers">
+                    
+                    <button type="button" class="btn-primary">Clear choices</button>
+
+                    <input type="radio" name="q2" id="q2a">
+                    <label class="option md" for="q2a">
+                        <span class="text-lg">A</span>
+                        Should it not hvae been this.
+                    </label>
+
+                    <input type="radio" name="q2" id="q2b">
+                    <label class="option md" for="q2b">
+                        <span class="text-lg">B</span>
+                        Should be not this.
+                    </label>
+
+                    <input type="radio" name="q2" id="q2c">
+                    <label class="option md" for="q2c">
+                        <span class="text-lg">C</span>
+                        Option is this
+                    </label>
+
+                    <input type="radio" name="q2" id="q2d">
+                    <label class="option md" for="q2d">
+                        <span class="text-lg">D</span>
+                        Not always this.
+                    </label>
+
+                </section>
+                
+            </div>
+
+            <div class="question-container" id="question_3">
+
+                <section class="question">
+                    <p class="number">
+                        <span class="text-muted">Question </span>
+                        <b class="md">3</b>
+                    </p>
+                    <div class="question-body">
+                        <p class="text md">How many times can you jump?</p>
+                        <div class="image"><img src="" alt=""></div>
+                    </div>
+                        
+                </section>
+
+            
+                <section class="answers">
+                    
+                    <button type="button" class="btn-primary">Clear choices</button>
+
+                    <input type="radio" name="q3" id="q3a">
+                    <label class="option md" for="q3a">
+                        <span class="text-lg">A</span>
+                        Just once.
+                    </label>
+
+                    <input type="radio" name="q3" id="q3b">
+                    <label class="option md" for="q3b">
+                        <span class="text-lg">B</span>
+                        Twice on a good day.
+                    </label>
+
+                    <input type="radio" name="q3" id="q3c">
+                    <label class="option md" for="q3c">
+                        <span class="text-lg">C</span>
+                        Three times when I am scared
+                    </label>
+
+                    <input type="radio" name="q3" id="q3d">
+                    <label class="option md" for="q3d">
+                        <span class="text-lg">D</span>
+                        More than four times when I won
+                    </label>
+
+                </section>
+                
+            </div>
+
             <!-- Finish Attempt Section -->
              <div class="finish-attempt-container">
                  
@@ -110,82 +205,11 @@
                     </div>
     
                     <nav class="goto-questions">
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
-                        <button class="goto">100</button>
+                        <!-- <button class="goto">1</button> -->
                     </nav>
                     
                     <div class="actions">
-                        <button class="btn-primary"> << Go Back</button>
+                        <button id="goBack" class="btn-primary"> << Go Back</button>
                         <button type="submit" class="btn-primary">Submit</button>
                     </div>
                  </section>
@@ -199,45 +223,10 @@
     <footer>
         <button class="btn-primary"> << Previous</button>
         <nav class="goto-questions">
-            <button class="goto">1</button>
-            <button class="goto">1</button>
-            <button class="goto">1</button>
-            <button class="goto">1</button>
-            <button class="goto">1</button>
-            <button class="goto">1</button>
-            <button class="goto active">1</button>
-            <button class="goto">1</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">001</button>
-            <button class="goto">1</button>
-            <button class="goto">1</button>
+            <!-- <button class="goto">1</button> -->
         </nav>
         <button class="btn-primary">Next >> </button>
+        <button class="btn-primary">Finish >> </button>
     </footer>
 </body>
 </html>

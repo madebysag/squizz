@@ -1,0 +1,32 @@
+main {
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+}
+
+main > p {
+    margin: 1rem 0;
+} 
+
+main > p.text-sm {
+    margin-top: 5rem;
+}
+
+main > p.text-xxl {
+    color: var(--blue);
+}
+
+main > p > .correct {
+    color: var(--blue);
+}
+
+main > p > .wrong {
+    color: var(--red);
+}
+
+main > div > .btn-primary {
+    display: inline-block;
+    margin-top: 2rem;
+    background-color: transparent;
+    border: var(--border);
+}
