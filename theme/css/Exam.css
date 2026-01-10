@@ -57,7 +57,7 @@ header > .progress-container {
 
 .progress-container > .progress > .progress-bar > .bar {
     background-color: var(--gray);
-    width: 50%;
+    width: 0%;
     height: 100%;
     position: absolute;
 }
@@ -83,9 +83,6 @@ main .question-container{
     grid-template-columns: repeat(2, 1fr);
     height: 80vh;
     width: 100%;
-    /* height: calc(100vh - 20vh); */
-    /* border-bottom: var(--border); */
-    /* padding-bottom: 5rem; */
 }
 
 

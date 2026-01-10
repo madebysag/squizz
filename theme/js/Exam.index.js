@@ -1,10 +1,11 @@
 import { formatedTime } from "./utils.js";
 
 class Counter {
-    constructor (element) {
+    constructor (element, otherElement) {
 
         // The timer element
         this.timer = element;
+        this.otherTimers = otherElement;
 
         // Get total time in minutes then convert to seconds
         this.total = parseFloat(this.timer.dataset.totalMinutes) * 60;
@@ -41,6 +42,8 @@ class Counter {
         }
 
         this.timer.innerText = formatedTime(this.total)
+
+        this.otherTimers.innerHTML = this.timer.outerHTML
     }
 }
 
@@ -48,13 +51,43 @@ class UIController {
 
     constructor() {
 
+        /**Reference Elements from dom */
+
+        this.examForm = document.querySelector("main > form")
+
         // All Questions
         this.questions = [...document.querySelectorAll(".question-container")];
+        this.gotoQuestionsContainers = [...document.querySelectorAll(".goto-questions")]
+        
+
+        // Next and Previous Questions
+        const navBtns = document.querySelectorAll("footer > .btn-primary")
+        this.previousQuestionBtn = navBtns[0]
+        this.nextQuestionBtn = navBtns[1]
+        
+        // Finish Attempt
+        this.finishAtemptPage = document.querySelector(".finish-attempt-container")
+        this.finishAtemptBackBtn = this.finishAtemptPage.querySelector("#goBack")
+
+        // Answers Options
+        this.answerOptions = [...this.examForm.querySelectorAll("input[type='radio']")]
+
+        // Progress Bar UI
+        this.finishAttemptprogressBarContainer = this.finishAtemptPage.querySelector(".progress")
+        this.progressBarContainer = document.querySelector(".progress")
+        this.progressBar = this.progressBarContainer.querySelector(".bar")
+        this.progressStats = this.progressBarContainer.querySelector(".questions-stats")
+
+        
+        // Active Questions
         this.activeQuestion = this.questions[0];
 
-        // Build Questions
-        this.gotoQuestionsContainers = [...document.querySelectorAll(".goto-questions")]
+        // Exam Progress
+        this.examProgress = new Set();
 
+        
+        /** Add Event Listeners */
+        // Build Questions
         this.gotoQuestionsContainers.forEach(container => {
             this.buildQuestionLinks(container)
 
@@ -69,22 +102,50 @@ class UIController {
                 }
             })
         })
-
-        // Next and Previous Questions
-        const navBtns = document.querySelectorAll("footer > .btn-primary")
-        this.previousQuestionBtn = navBtns[0]
-        this.nextQuestionBtn = navBtns[1]
         
+        // Next and Previous Btn
         this.nextQuestionBtn.addEventListener("click", () => { this.goToNextQuestion() })
         this.previousQuestionBtn.addEventListener("click", () => { this.goToPreviousQuestion() })
 
-        // finished Attepmt
-        this.finishAtemptPage = document.querySelector(".finish-attempt-container")
-        this.finishAtemptBackBtn = this.finishAtemptPage.querySelector("#goBack")
-        
+        // finished Attepmt        
         this.finishAtemptBackBtn.addEventListener("click", e => {
             e.preventDefault()
             this.toggleFinishAttemptPage()
+        })
+
+        // Answers a question
+        // hightlight link
+        // increased progress
+
+        // Clear Choices and reduce progress
+        this.questions.forEach(question => {
+            question.querySelector("button.btn-primary").addEventListener("click", e => {
+
+                let questionNumber;
+
+                [...e.target.parentElement.querySelectorAll("input[type='radio']")].forEach(input => {
+
+                    // Clear input
+                    input.checked = false;
+
+                    questionNumber = input.name;
+
+                })
+
+                // Reduce Progress
+                this.renderProgress(questionNumber, true)
+                
+            })
+        })
+
+        // Answer a question leads to increase progress
+        this.answerOptions.forEach(option => {
+            option.addEventListener("change", e => {
+                
+                this.renderProgress(e.currentTarget.name)
+                
+                
+            })
         })
 
     }
@@ -103,10 +164,10 @@ class UIController {
         
         this.activeQuestion = this.questions[questionNumber - 1]
 
-        this.activeQuestion.classList.add("active")
+        this.activeQuestion.classList.add("active")        
 
         // Next btn content
-        this.nextQuestionBtn.innerText = (id == this.questions.length) ? "Finish Attempt" : "Next >>"
+        this.nextQuestionBtn.innerText = (questionNumber == this.questions.length) ? "Finish Attempt" : "Next >>"
     }
 
     goToNextQuestion() {
@@ -132,16 +193,41 @@ class UIController {
     }
 
     // todo
-    // Next and previous btn
     // Question Navigation, hightlight answered Question
     // Attmept Progress
-    // Last Question = Finish Attempt btn
     // clear options
+
+    // A Progress tracker
+    // // When an option is clicked - increase progress 
+    // // Clear option? Reduce progress
+    
+    renderProgress(questionId, clearChoice = false) {
+        if (clearChoice) this.examProgress.delete(questionId)
+        else this.examProgress.add(questionId)
+
+        this.progressBar.style.width = `${(this.examProgress.size / this.questions.length) * 100}%` 
+
+        this.progressStats.innerHTML = `<p class="sm">${this.examProgress.size} <span class="text-muted">answered</span></p>
+                    <p class="sm">${this.questions.length - this.examProgress.size} <span class="text-muted">left</span></p>`;
+        
+        this.finishAttemptprogressBarContainer.innerHTML = this.progressBarContainer.innerHTML
+
+        // Handle Link Highlighting
+        const questionNumber = questionId.match(/\d+/g)[0]
+        this.gotoQuestionsContainers.forEach(container => {
+            clearChoice ? container.children[questionNumber - 1].classList.remove("active") :  container.children[questionNumber - 1].classList.add("active")
+        })
+        
+    }
 }
 
 
-const timerElement = document.querySelector(".timer-container > p")
-const timer = new Counter(timerElement)
+const timerElement = document.querySelector("header .timer-container > p")
+const otherTimerElement = document.querySelector(".finish-attempt-container .timer-container > p")
+
+console.log(otherTimerElement);
+
+const timer = new Counter(timerElement, otherTimerElement)
 timer.init()
 
 const uiController = new UIController()
