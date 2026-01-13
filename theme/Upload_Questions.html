@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/Upload_Questions.css">
+    <script type="module" src="./js/UploadQuestions.index.js"></script>
     <title>Upload Questions</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
                         <span class="text-muted">Question </span>
                         <b class="md">1</b>
                     </p>
-                    <button type="button" class="btn-secondary">Delete Question</button>
+                    <button type="button" class="btn-secondary delete-question" data-id="question_1">Delete Question</button>
 
                     <div class="question-body">
                         <textarea name="question_1" class="text-md">What is the best mesthod to center a div?</textarea>
@@ -33,9 +34,10 @@
                     </div>
                     
 
-                    <button type="button" class="btn-secondary">Upload Picture</button>
+                    <label class="btn-secondary upload-image-btn">Upload Picture <input type="file" name="question_1_image" id="question_1_image" accept=".png, .jpeg"></label>
+                     
 
-                    <button type="button" class="btn-secondary">Delete Picture</button>
+                    <button type="button" class="btn-secondary delete-uploaded-image">Delete Picture</button>
                         
                 </div>
 
@@ -90,11 +92,11 @@
                 
             </section>
 
-            <div class="actions">
+            <div class="actions add-question-container">
                 <p class="text-condensed text-muted text-sm">Add Questions</p>
-                <button class="btn-secondary">Four Options A - D</button>
-                <button class="btn-secondary">Five Options A - E </button>
-                <button class="btn-secondary">True / False</button>
+                <button type="button" class="btn-secondary" data-type="A-D">Four Options A - D</button>
+                <button type="button" class="btn-secondary" data-type="A-E">Five Options A - E </button>
+                <button type="button" class="btn-secondary" data-type="T/F">True / False</button>
             </div>
         </main>
         
@@ -102,10 +104,10 @@
             <div class="tabs-container">
 
                 <div class="tabs-title">
-                    <button class="btn-primary active">Meta Data</button>
-                    <button class="btn-primary">Timing and Duration</button>
-                    <button class="btn-primary">Exam Instructions</button>
-                    <button class="btn-primary">Go to Question</button>
+                    <button type="button" class="btn-primary active" data-tab-id="meta_data">Meta Data</button>
+                    <button type="button" class="btn-primary" data-tab-id="timing">Timing and Duration</button>
+                    <button type="button" class="btn-primary" data-tab-id="instructions">Exam Instructions</button>
+                    <button type="button" class="btn-primary" data-tab-id="goto">Go to Question</button>
                 </div>
 
                 <div class="tabs">
@@ -126,7 +128,7 @@
                         
                     </div>
                     
-                    <div class="active" id="timing">
+                    <div class="" id="timing">
                         
                         <label for="exam_duration" class="text-condensed text-muted text-sm">Exam Duration - in minutes*</label>
                         <input type="number" name="exam_duration" class="text-sm" id="exam_duration">
@@ -138,89 +140,12 @@
                         <input type="datetime-local" name="exam_end" class="text-sm" id="exam_end">
 
                     </div>
-                    <div class="active" id="instructions">
+                    <div class="" id="instructions">
                         <label for="exam_instructions" class="text-condensed text-muted text-sm">Please write each instruction on a new line</label>
                         <textarea name="exam_instructions" id="exam_instructions"></textarea>
                     </div>
-                    <div class="active" id="goto">
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto active text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-                        <a href="#" class="goto text-muted">001</a>
-
+                    <div class="" id="goto">
+                        <a href="#question_1" class="goto text-muted">1</a>
                     </div>
                 </div>
             </div>
