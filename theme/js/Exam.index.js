@@ -225,7 +225,6 @@ class UIController {
 const timerElement = document.querySelector("header .timer-container > p")
 const otherTimerElement = document.querySelector(".finish-attempt-container .timer-container > p")
 
-console.log(otherTimerElement);
 
 const timer = new Counter(timerElement, otherTimerElement)
 timer.init()

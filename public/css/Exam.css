@@ -101,8 +101,13 @@ main .question-container > .question > .question-body {
 main .question-container > .question > .question-body > .image {
     width: 100%;
     margin-top: 2rem;
-    height: 100px;
-    background-color: var(--gray);
+    overflow: hidden;
+    text-align: center;
+}
+
+
+main .question-container > .question > .question-body > .image img {
+    height: 15rem;
 }
 
 main .question-container > .answers {

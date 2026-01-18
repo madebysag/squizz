@@ -1,0 +1,16 @@
+{
+    "name": "madebysag/squizz-online",
+    "description": "An online exam proctor",
+    "authors": [
+        {
+            "name": "Abdulgafar",
+            "email": "designbysag@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {   
+            "App\\" : "App/",
+            "Framework\\": "Framework/"         
+        }
+    }
+}
