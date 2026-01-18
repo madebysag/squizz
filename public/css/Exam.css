@@ -57,7 +57,7 @@ header > .progress-container {
 
 .progress-container > .progress > .progress-bar > .bar {
     background-color: var(--gray);
-    width: 50%;
+    width: 0%;
     height: 100%;
     position: absolute;
 }
@@ -82,16 +82,14 @@ main .question-container{
     left: 0;
     grid-template-columns: repeat(2, 1fr);
     height: 80vh;
-    /* height: calc(100vh - 20vh); */
-    /* border-bottom: var(--border); */
-    /* padding-bottom: 5rem; */
+    width: 100%;
 }
 
 
 main .question-container > .question {
     border-right: var(--border);
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 main .question-container > .question > .question-body {
@@ -105,14 +103,13 @@ main .question-container > .question > .question-body > .image {
     text-align: center;
 }
 
-
 main .question-container > .question > .question-body > .image img {
     height: 15rem;
 }
 
 main .question-container > .answers {
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     /* padding-bottom: 5rem; */
 }
 
@@ -233,13 +230,14 @@ footer > button.btn-primary:first-child {
 }
 
 footer > nav {
-    height: 3rem;
+    height: 3.2rem;
     width: 35vw;
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
 }
 
-button.goto {
+.goto {
+    display: inline-block;
     width: 2rem;
     height: 2rem;
     border: var(--border);
@@ -249,11 +247,11 @@ button.goto {
     background-color: transparent;
 }
 
-button.goto:hover {
+.goto:hover {
     border-color: var(--black);
 }
 
-button.goto.active {
+.goto.active {
     border-color: var(--black);
     background-color: var(--light-blue);
 }

@@ -73,9 +73,23 @@ main > .question-container > .question > .question-body textarea{
 main > .question-container > .question > .question-body .image{
     width: 100%;
     margin-top: 2rem;
-    height: 100px;
-    background-color: var(--gray);
+    overflow: hidden;
+    text-align: center;
+    /* height: 15rem; */
+    /* background-color: var(--gray); */
 }
+
+main > .question-container > .question > .question-body .image img {
+    height: 15rem;
+}
+
+/* main > .question-container > .question > .upload-image-btn { */
+
+main > .question-container > .question > .upload-image-btn > input {
+    display: none;
+}
+
+
 
 
 main > .question-container > p.text-condensed {
