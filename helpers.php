@@ -48,6 +48,6 @@ function loadView(string $name, array $data = []) {
         extract($data);
         require $viewPath;
     } else {
-        echo "File does not exist. Fillpath = {$viewPath}";
+        echo "File does not exist. Fullpath = {$viewPath}";
     }
 }

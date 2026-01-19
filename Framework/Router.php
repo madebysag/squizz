@@ -90,6 +90,6 @@ class Router {
             }
         }
 
-        ErrorController::notFound(404);
+        ErrorController::notFound();
     }
 }

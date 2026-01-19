@@ -6,10 +6,9 @@ class ErrorController {
 
     public static function notFound(string $message = "This page does not exists!") : void {
 
-        // loadView("error", [
-        //     "status" => 404,
-        //     "message" => $message
-        // ]);
-        inspect($message);
+        loadView("error/404", [
+            "status" => 404,
+            "message" => $message
+        ]);
     }
 }
