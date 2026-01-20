@@ -1,3 +1,4 @@
 .env
 db/
 bs-config.js
+config
