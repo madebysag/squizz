@@ -5,6 +5,9 @@ $router->get("/", "HomeController@index");  //  List all Public exams
 $router->get("/exams/write", "ExamController@index"); //  Where exam key is entered to take exam 
 $router->get("/exams/create", "ExamController@create"); //  show Form where new exams are uploaded
 
+$router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is entered to take exam 
+// $router->post("/auth/exams/write", "ExamController@getExam"); // Get exam
+
 $router->get("/auth/students/register", "StudentController@create"); // show register screen for auth/students
 $router->get("/auth/students/login", "StudentController@login"); // show login screen for auth/students
 
@@ -27,7 +30,7 @@ $router->post("/exams/{id}/start", "ExamController@start");  // Start an exam
 $router->post("/exams/{id}/submit", "ExamController@submit"); // submit an exam
 $router->get("/exams/{id}/finish", "ExamController@finish"); // Get the finish page which may have result displayed
 
-$router->get("/tutors/{name}/exams", "TutorController@exams"); // show register screen for tutors 
+$router->get("/tutors/{name}/exams", "TutorController@exams"); // show all exams by the tutor
 
 
 // $router->get("/students/{id}", "HomeController@create");

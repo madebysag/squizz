@@ -51,3 +51,15 @@ function loadView(string $name, array $data = []) {
         echo "File does not exist. Fullpath = {$viewPath}";
     }
 }
+
+
+/**
+ * Redirect to a url
+ * 
+ * @param string $url;
+ * 
+ * @return void; 
+ */
+function redirect(string $url) {
+    header("Location: {$url}");
+}

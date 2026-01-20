@@ -9,14 +9,18 @@
 </head>
 <body>
     <main>
-        <form action="" method="">
+        <form action="/exams/write" method="POST">
             <p class="text-lg text-condensed">Take an Exam</p>
             <div class="input-group">
                 <label for="exam" class="text-sm">Exam Key</label>
                 <input type="text" name="exam_key" id="exam" >
-                <div class="error">Exam does not exist</div>
+
+                <?php if(isset($error)) : ?>
+                <div class="error"><?= $error ?></div>
+                <?php endif; ?>
+
             </div>
-            <div class="submit btn-primary">Next <b>>></b></div>
+            <button type="submit" class="submit btn-primary">Next <b>>></b></button>
         </form>
     </main>
 </body>

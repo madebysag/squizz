@@ -3,6 +3,8 @@
 namespace Framework;
 
 use PDO;
+// use PDOException;
+// use Exception;
 
 class Database {
 
@@ -22,6 +24,22 @@ class Database {
         } catch (PDOException $e) {
             throw new Exception("Database Connection Failed.\n Message: {$e->getMessage()}");
         }
-        inspect($this->conn, false);
+    }
+
+    public function query(string $query, array $params) {
+        try {
+            $stmt = $this->conn->prepare($query);
+
+            foreach ($params as $param => $value) {
+                $stmt->bindValue(":". $param, $value);
+            }
+
+            $stmt->execute();
+            return $stmt;
+
+        } catch (PDOException $e) {
+            throw new Exception("Failed to execute query.\nError Message: {$$e->getMessage()}");
+        }
+
     }
 }
