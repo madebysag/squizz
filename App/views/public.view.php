@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/Public_Exams.css">
-    <title>Public Exam List</title>
+    <title>Public Exams</title>
 </head>
 <body>
     <header>
@@ -24,188 +24,62 @@
         </div>
     </header>
     <main>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
-                </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
+
+        <?php if(isset($error)) : ?>
+
+            <div class="container">
+                <div class="wrapper">
+                    <div href="#" class="text-md exam-link">
+                        <?= $error ?>
+                    </div>
                 </div>
             </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
+
+        <?php else: ?>
+
+            <?php foreach($exams as $exam) : ?>
+
+                <div class="container">
+                    <div class="wrapper">
+                        <a href="#" class="text-sm exam-link">
+
+                            <?= $exam->title ?>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            
+                            <?php if (isExamLive($exam->start_at, $exam->end_at)) : ?> 
+                            
+                                <span class="text-blue">LIVE</span>
+                            
+                            <?php else : ?> 
+                            
+                                <span class="text-muted">UNALIVE</span>
+                            
+                            <?php endif; ?> 
+                        </a>
+                        <div>
+                            <p class="text-muted">Author</p>
+                            <p><?= $exam->author ?? "Anonymous" ?></p>
+                        </div>
+                        <div>
+                            <p class="text-muted">Details</p>
+                            <p><?= $exam->questions_count ?> questions <br> <?= $exam->duration ?> minutes</p>
+                        </div>
+                        <div>
+                            <p class="text-muted">Start Date</p>
+                            <p><?= formatDate($exam->start_at, "<br>") ?></p>
+                        </div>
+                        <div>
+                            <p class="text-muted">End Date</p>
+                            <p><?= formatDate($exam->end_at, "<br>") ?></p>
+                        </div>
+                    </div>
+                    <p>Tags - <?= $exam->tags ?></p>
                 </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
-                </div>
-            </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
-                </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
-                </div>
-            </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
-                </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
-                </div>
-            </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
-                </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
-                </div>
-            </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
-                </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
-                </div>
-            </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
-        <div class="container">
-            <div class="wrapper">
-                <a href="#" class="text-sm exam-link">
-                    Chemistry of the dead and the living, the dead tell some tales
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-blue">LIVE</span>
-                </a>
-                <div>
-                    <p class="text-muted">Author</p>
-                    <p>Mr Olalekan</p>
-                </div>
-                <div>
-                    <p class="text-muted">Details</p>
-                    <p>90 questions <br> 60 minutes</p>
-                </div>
-                <div>
-                    <p class="text-muted">Start Date</p>
-                    <p>25/01/25 <br> 09:30 am</p>
-                </div>
-                <div>
-                    <p class="text-muted">End Date</p>
-                    <p>25/01/25 <br> 02:30 pm</p>
-                </div>
-            </div>
-            <p>Tags - Chemistry, Biology, Sociology, Chemobobo, Physics</p>
-        </div>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
 
     </main>
 </body>

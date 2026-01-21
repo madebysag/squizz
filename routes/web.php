@@ -1,11 +1,11 @@
 <?php
 
-$router->get("/", "HomeController@index");  //  List all Public exams
+$router->get("/", "HomeController@index");  //  List all Public exams #
 
-$router->get("/exams/write", "ExamController@index"); //  Where exam key is entered to take exam 
-$router->get("/exams/create", "ExamController@create"); //  show Form where new exams are uploaded
+$router->get("/exams/write", "ExamController@index"); //  Where exam key is entered to take exam  #
+$router->get("/exams/create", "ExamController@create"); //  show Form where new exams are uploaded 
 
-$router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is entered to take exam 
+$router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is entered to take exam #
 // $router->post("/auth/exams/write", "ExamController@getExam"); // Get exam
 
 $router->get("/auth/students/register", "StudentController@create"); // show register screen for auth/students

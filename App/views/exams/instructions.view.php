@@ -15,7 +15,7 @@
         </div>
         
         <div class="exam-info">
-            <p class="author text-sm">You can take this exam between <b><?= $exam->start_at ?></b> to <b><?= $exam->end_at ?></b></p>
+            <p class="author text-sm">You can take this exam between <b><?= formatDate($exam->start_at) ?></b> to <b><?= formatDate($exam->end_at) ?></b></p>
         </div>
         
         <div class="exam-info">
@@ -35,7 +35,7 @@
                 </ol>
             </div>
         </div>
-        <a href="/exams/<?= $exam->id ?>/start" class="submit btn-primary">Start Exam <b>>></b></a>
+        <a href="/exams/<?= $exam->exam_key ?>/start" class="submit btn-primary">Start Exam <b>>></b></a>
     </main>
 </body>
 </html>

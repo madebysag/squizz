@@ -63,3 +63,40 @@ function loadView(string $name, array $data = []) {
 function redirect(string $url) {
     header("Location: {$url}");
 }
+
+/**
+ * Format Date coming from Database 
+ * 
+ * @param string $date;
+ * @param string $delimiter;
+ * 
+ * @return string; 
+ */
+function formatDate(string $date, string $delimiter = "—") {
+    try {
+        $dateObject = new DateTime($date);
+
+        $formatedDate =  $dateObject->format("F d, Y - h:i a");
+        $formatedDate = explode("-", $formatedDate);
+
+        return implode($delimiter, $formatedDate);
+        
+    } catch (Exception $e) {
+        throw new Exception("Failed to parse date from DB: {$e->getMessage()}"); 
+    }  
+}
+
+/**
+ * Check if exam is live 
+ * 
+ * @param string $start_at;
+ * @param string $end_at;
+ * 
+ * @return bool; 
+ */
+function isExamLive(string $start_at, string $end_at) {
+    $start = strtotime($start_at);
+    $end = strtotime($end_at);
+
+    return ($start <= time()) && ($end >= time());
+}

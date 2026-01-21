@@ -62,9 +62,7 @@ class ExamController {
 
         loadView("exams/instructions", [
             "exam" => $exam
-        ]);
-        // redirect("exams/{$key}/instructions");
-        
+        ]);        
     }
 
     /**
