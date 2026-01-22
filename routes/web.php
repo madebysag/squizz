@@ -3,9 +3,15 @@
 $router->get("/", "HomeController@index");  //  List all Public exams #
 
 $router->get("/exams/write", "ExamController@index"); //  Where exam key is entered to take exam  #
-$router->get("/exams/create", "ExamController@create"); //  show Form where new exams are uploaded 
+$router->get("/exams/create", "ExamController@create"); //  show Form where new exams are uploaded # 
 
 $router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is entered to take exam #
+
+$router->post("/exams", "ExamController@store");  // Upload a new exam
+$router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
+
+
+
 // $router->post("/auth/exams/write", "ExamController@getExam"); // Get exam
 
 $router->get("/auth/students/register", "StudentController@create"); // show register screen for auth/students
@@ -20,8 +26,6 @@ $router->get("/auth/tutors/login", "TutorController@login"); // show login scree
 $router->post("/auth/tutors/login", "TutorController@authenticate"); // login the tutors 
 $router->post("/auth/tutors/logout", "TutorController@logout"); // logout the tutor
 
-$router->post("/exams", "ExamController@store");  // Upload a new exam
-$router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
 $router->put("/exams/{id}/edit", "ExamController@edit");   // edit an exam
 $router->delete("/exams/{id}", "ExamController@delete");   // Delete an uploaded exam
 

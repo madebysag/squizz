@@ -19,7 +19,7 @@
                 <form action="">
                     <input type="text" name="search_exam" id="search_exam" placeholder="Search by Tags, Title, Keywords...">
                 </form>
-                <button class="btn-primary">Take Private Exam</button>
+                <a href="/exams/write" class="btn-primary">Take Private Exam</a>
             </div>
         </div>
     </header>
@@ -40,8 +40,10 @@
             <?php foreach($exams as $exam) : ?>
 
                 <div class="container">
-                    <div class="wrapper">
-                        <a href="#" class="text-sm exam-link">
+                    <form method="POST" action="/exams/write" class="wrapper">
+                        <input type="hidden" name="exam_key" value="<?= $exam->exam_key ?>">
+
+                        <button type="submit" class="text-sm exam-link">
 
                             <?= $exam->title ?>
                             
@@ -56,7 +58,7 @@
                                 <span class="text-muted">UNALIVE</span>
                             
                             <?php endif; ?> 
-                        </a>
+                            </button>
                         <div>
                             <p class="text-muted">Author</p>
                             <p><?= $exam->author ?? "Anonymous" ?></p>
@@ -73,7 +75,7 @@
                             <p class="text-muted">End Date</p>
                             <p><?= formatDate($exam->end_at, "<br>") ?></p>
                         </div>
-                    </div>
+                    </form>
                     <p>Tags - <?= $exam->tags ?></p>
                 </div>
 

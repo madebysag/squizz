@@ -15,7 +15,7 @@
         <a class="btn-secondary">Go to Profile</a>
     </header>
 
-    <form action="">
+    <form action="/exams" method="POST" >
 
         <main>
             <section class="question-container" id="question_1">
@@ -153,15 +153,15 @@
             <div class="actions">
                 <p class="text-condensed text-muted text-sm">Records</p>
                 <p class="text-muted text-sm">* Note that Saving does not make the exam go live, it only keep the current records. To go live, use Publish button.</p>
-                <button class="btn-secondary">Delete</button>
-                <button type="submit" class="btn-primary">Save</button>
+                <button class="btn-secondary" data-action="/exams/delete" >Delete</button>
+                <button type="submit" class="btn-primary" data-action="/exams" >Save</button>
             </div>
             
             <div class="actions">
                 <p class="text-condensed text-muted text-sm">Go Live</p>
                 <p class="text-muted text-sm">* Publishing will make the exam go live and accessible by student</p>
-                <button class="btn-secondary">Unpublish</button>
-                <button class="btn-primary">Publish</button>
+                <button class="btn-secondary" data-action="/exams/unpublish">Unpublish</button>
+                <button class="btn-primary" data-action="/exams/publish" >Publish</button>
             </div>
         </aside>
             

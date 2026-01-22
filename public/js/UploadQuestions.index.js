@@ -10,6 +10,10 @@ class UIController {
         
         this.tabTitles = [...document.querySelectorAll("aside .tabs-title > button")]
         this.tabContent = [...document.querySelectorAll("aside .tabs > div")]
+
+        this.formElement = document.querySelector("body > form");
+
+        this.formActionBtns = [...document.querySelectorAll("form aside button[data-action]")]
         
 
         // this.removeQuestionBtns = [...document.querySelectorAll("main button.delete-question")]
@@ -33,11 +37,14 @@ class UIController {
             })
         });
 
-        // Upload Images
-        // console.log(this.uploadImageBtns);
+        // Don't submit when enter is pressed in text input
+        this.disableEnterSubmit();
+
+        // Form btns Actions
+        this.formActionBtnsEvent()
         
         
-        this.addQuestionBtnsEvents()
+        if (this.questions.length > 0) this.addQuestionBtnsEvents();
         
 
     }
@@ -98,7 +105,7 @@ class UIController {
                     <span class="text-lg text-muted">${option}</span>
                     <textarea class="text-md" name="question_option_${questionNumber}${option}" ${optionEditable} >${trueOrFalseOption[index] ?? ""}</textarea>
                     <label class="btn-secondary" >
-                        ( <input type="radio" name="question_option_${questionNumber}" id="question_option_${questionNumber}${option}"> ) Correct Answer
+                        ( <input type="radio" value="${option}" name="correct_answer_${questionNumber}" id="question_option_${questionNumber}${option}"> ) Correct Answer
                     </label>
                 </div>`;
         })
@@ -250,6 +257,26 @@ class UIController {
                 link.innerText = questionNumber;
             })
         }
+    }
+
+    disableEnterSubmit() {
+        this.formElement.addEventListener("keydown", e => {
+            if (e.key == "Enter" && e.target.tagName == "INPUT") {                
+                e.preventDefault();
+            }
+        })
+    }
+
+    formActionBtnsEvent() {
+        this.formActionBtns.forEach(btn => {
+            btn.addEventListener("click", e => {
+                e.preventDefault()
+
+                this.formElement.action = e.target.dataset.action;
+
+                this.formElement.submit();
+            })
+        })
     }
 }
 

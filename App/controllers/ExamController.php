@@ -65,6 +65,7 @@ class ExamController {
         ]);        
     }
 
+    
     /**
      * Display Exam instructions
      */
@@ -76,5 +77,13 @@ class ExamController {
         loadView("exams/create", [
             // "error" => $error
         ]);
+    }
+    
+    /**
+     * Display Exam instructions
+     */
+    public function store($params) : void {
+        // header("Content-type: application/json");
+        inspect($_POST);
     }
 }

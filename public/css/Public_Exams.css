@@ -55,7 +55,7 @@ main > .container {
     width: fit-content;
 }
 
-main > .container > div.wrapper {
+main > .container > form.wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: baseline;
@@ -63,11 +63,11 @@ main > .container > div.wrapper {
     padding-bottom: 0.5rem;
 }
 
-main > .container > div.wrapper > div {
+main > .container > form.wrapper > div {
     margin: 1rem;
 }
 
-main > .container > div.wrapper > .exam-link {
+main > .container > form.wrapper > .exam-link {
     grid-column: span 2;
     margin: 1rem;
     padding: 1rem;
@@ -76,12 +76,12 @@ main > .container > div.wrapper > .exam-link {
     border-radius: 10px;
 }
 
-main > .container > div.wrapper > .exam-link:hover {
+main > .container > form.wrapper > .exam-link:hover {
     opacity: 0.9;
     text-decoration: underline;
 }
 
-main > .container > div.wrapper > div .text-muted {
+main > .container > form.wrapper > div .text-muted {
     margin: 0.5rem 0 0.2rem;
 }
 
