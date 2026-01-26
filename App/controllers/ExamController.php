@@ -3,17 +3,19 @@
 namespace App\Controllers;
 
 use Framework\Database;
+use App\Models\Exam;
 
 class ExamController {
+    protected $examModel;
+
 
     public function __construct() {
 
         $config = require basePath("config/db.php");
-        $this->db = new Database($config);
-        
-        // $this->users = $this->db->query("SELECT * FROM `organisations`", [])->fetchAll();
 
-        // inspect($this->users, false);
+        $db = new Database($config);
+
+        $this->examModel = new Exam($db);
         
     }
 
@@ -44,12 +46,7 @@ class ExamController {
             
         } 
 
-        // Check if key exist
-        $params = [
-            "key" => $key
-        ];
-
-        $exam = $this->db->query("SELECT * FROM `exams` WHERE `exam_key` = :key; ", $params)->fetch();
+        $exam = $this->examModel->findByKey($key);
         
         if (!$exam) {
             
@@ -83,18 +80,15 @@ class ExamController {
      * Display Exam instructions
      */
     public function store($params) : void {
-        // header("Content-type: application/json");
 
         $examFields = ["title", "author_id", "course", "tags", "duration", "start_at", "end_at", "instructions", "questions_count", "exam_key"];
         $questionFields = ["body", "picture_url", "correct_answer_id", "exam_id"];
         $answerFields = ["body", "question_id"];
 
-        $metaData = [];
+        $metaData = [ "questions_count" => 4, "author_id" => 1];
         $questions = [];
         $answers = [];
 
-        // $postExamFields = array_flip($examFields);
-        // inspect($postExamFields);
         foreach($_POST as $key => $param) {
 
             if(str_contains($key, "answer")) {
@@ -105,6 +99,8 @@ class ExamController {
                 $metaData[$key] = $param;
             }
         }
+
+        $this->examModel->save($metaData);
         inspect($questions, false);
         inspect($answers, false);
         // inspect($param, false);
