@@ -103,7 +103,7 @@ class UIController {
             optionTemplate += `
                 <div>
                     <span class="text-lg text-muted">${option}</span>
-                    <textarea class="text-md" name="question_option_${questionNumber}${option}" ${optionEditable} >${trueOrFalseOption[index] ?? ""}</textarea>
+                    <textarea class="text-md" name="answer_${option}_${questionNumber}" ${optionEditable} >${trueOrFalseOption[index] ?? ""}</textarea>
                     <label class="btn-secondary" >
                         ( <input type="radio" value="${option}" name="correct_answer_${questionNumber}" id="question_option_${questionNumber}${option}"> ) Correct Answer
                     </label>
@@ -127,7 +127,7 @@ class UIController {
                         <div class="image"><img src="" alt=""></div>
                     </div>
                     
-                    <label class="btn-secondary upload-image-btn">Upload Picture <input type="file" name="question_1_image" id="question_1_image" accept=".png, .jpeg"></label>
+                    <label class="btn-secondary upload-image-btn">Upload Picture <input type="file" name="question_image_${questionNumber}" id="question_${questionNumber}_image" accept=".png, .jpeg"></label>
 
                     <button type="button" class="btn-secondary delete-uploaded-image">Delete Picture</button>
                         

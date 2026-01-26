@@ -84,6 +84,31 @@ class ExamController {
      */
     public function store($params) : void {
         // header("Content-type: application/json");
-        inspect($_POST);
+
+        $examFields = ["title", "author_id", "course", "tags", "duration", "start_at", "end_at", "instructions", "questions_count", "exam_key"];
+        $questionFields = ["body", "picture_url", "correct_answer_id", "exam_id"];
+        $answerFields = ["body", "question_id"];
+
+        $metaData = [];
+        $questions = [];
+        $answers = [];
+
+        // $postExamFields = array_flip($examFields);
+        // inspect($postExamFields);
+        foreach($_POST as $key => $param) {
+
+            if(str_contains($key, "answer")) {
+                $answers[$key] = $param;
+            } else if (str_contains($key, "question")) {
+                $questions[$key] = $param;
+            } else {
+                $metaData[$key] = $param;
+            }
+        }
+        inspect($questions, false);
+        inspect($answers, false);
+        // inspect($param, false);
+        inspect($metaData, false);
+
     }
 }
