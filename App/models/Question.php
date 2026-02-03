@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Base\Model;
+
+class Question extends Model {
+
+    /*
+    public function save(array $params) {
+        
+        $this->db->query("INSERT INTO `answers` (body, question_id) VALUES (:body, :question_id)", $params);
+    }
+    */
+
+    public function saveMany(array $questionArray, int $examId) {
+
+        $queryValuesString = "";
+        $params = [];
+
+        foreach($questionArray as $questionNumber => $question) {
+                
+            $queryValuesString .= "(?, ?, ?, ?),";
+
+            $params = [...$params, ...$question];
+            $params[] = $examId;
+            // inspect($question, false);
+        }
+        inspect($questionArray, false);
+        inspect($params, false);
+        // inspect($queryValuesString);
+        
+        $params = array_values($params); 
+        // inspect($params, false);
+        $queryValuesString = trim($queryValuesString, ",");
+        
+        $this->db->query("INSERT INTO `questions` (type, body, picture_url, exam_id) VALUES {$queryValuesString}", $params, false);
+    }
+
+}

@@ -3,19 +3,30 @@
 namespace App\Controllers;
 
 use Framework\Database;
+use Framework\Sorter;
 use App\Models\Exam;
+use App\Models\Question;
+use App\Models\Answer;
 
 class ExamController {
+    protected $db;
+
     protected $examModel;
+    protected $answerModel;
+    protected $questionModel;
+
+    protected $examId;
 
 
     public function __construct() {
 
         $config = require basePath("config/db.php");
 
-        $db = new Database($config);
+        $this->db = new Database($config);
 
-        $this->examModel = new Exam($db);
+        $this->examModel = new Exam($this->db);
+        $this->answerModel = new Answer($this->db);
+        $this->questionModel = new Question($this->db);
         
     }
 
@@ -81,14 +92,14 @@ class ExamController {
      */
     public function store($params) : void {
 
-        $examFields = ["title", "author_id", "course", "tags", "duration", "start_at", "end_at", "instructions", "questions_count", "exam_key"];
-        $questionFields = ["body", "picture_url", "correct_answer_id", "exam_id"];
-        $answerFields = ["body", "question_id"];
+        // $examFields = ["title", "author_id", "course", "tags", "duration", "start_at", "end_at", "instructions", "questions_count", "exam_key"];
+        // $questionFields = ["body", "picture_url", "correct_answer_id", "exam_id"];
+        // $answerFields = ["body", "question_id"];
 
-        $metaData = [ "questions_count" => 4, "author_id" => 1];
+        $metaData = [];
         $questions = [];
         $answers = [];
-
+        
         foreach($_POST as $key => $param) {
 
             if(str_contains($key, "answer")) {
@@ -99,12 +110,30 @@ class ExamController {
                 $metaData[$key] = $param;
             }
         }
+        
+        $sortedQuestions = Sorter::sort($questions);
+        $sortedAnswers = Sorter::sort($answers);
+        
+        $metaData["author_id"] = 1;
+        $metaData["questions_count"] = count($sortedQuestions);
 
+        // inspect($metaData, false);
+        // inspect($questions, false);
+        // inspect($answers, false);
+        // inspect($sortedQuestions, false);
+        // inspect($sortedAnswers, false);
+        
+        // Begin Transaction
+        
         $this->examModel->save($metaData);
-        inspect($questions, false);
-        inspect($answers, false);
-        // inspect($param, false);
-        inspect($metaData, false);
+        
+        $this->examId = $this->examModel->lastInsertId();
+                
+        $this->questionModel->saveMany($sortedQuestions, $this->examId);
+        
+        // $this->answerModel->saveMany($sortedAnswers);
+
+        echo "Heloo";
 
     }
 }

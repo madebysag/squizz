@@ -112,10 +112,11 @@ class UIController {
         
 
         const questionTemplate = `
-        <section class="question-container" id="question_${questionNumber}">
+        <section class="question-container" id="question_${questionNumber}" data-type="${type}">
 
                 <!-- Questions -->
                 <div class="question">
+                    <input type="hidden" name="question_type_${questionNumber}" value="${type}">
                     <p class="number">
                         <span class="text-muted">Question </span>
                         <b>${questionNumber}</b>

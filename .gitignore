@@ -2,3 +2,5 @@
 db/
 bs-config.js
 config
+vendor/
+node/

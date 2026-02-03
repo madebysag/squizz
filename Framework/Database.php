@@ -3,8 +3,8 @@
 namespace Framework;
 
 use PDO;
-// use PDOException;
-// use Exception;
+use PDOException;
+use Exception;
 
 class Database {
 
@@ -26,19 +26,28 @@ class Database {
         }
     }
 
-    public function query(string $query, array $params = []) {
+    public function query(string $query, array $params = [], bool $limited = true) {
         try {
             $stmt = $this->conn->prepare($query);
 
-            foreach ($params as $param => $value) {
-                $stmt->bindValue(":". $param, $value);
-            }
+            if ($limited) { #number of parameter is known
+                
+                foreach ($params as $param => $value) {
+                    $stmt->bindValue(":". $param, $value);
+                }
+    
+                $stmt->execute();
 
-            $stmt->execute();
+            } else {    #unknown params as (? , ?)
+
+                $stmt->execute($params);
+            } 
+
+            // inspect($this->conn);
             return $stmt;
 
         } catch (PDOException $e) {
-            throw new Exception("Failed to execute query.\nError Message: {$$e->getMessage()}");
+            throw new Exception("Failed to execute query.\nError Message: {$e->getMessage()}");
         }
 
     }
