@@ -7,6 +7,8 @@ use Framework\Sorter;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
+use PDOException;
+use Exception;
 
 class ExamController {
     protected $db;
@@ -16,6 +18,7 @@ class ExamController {
     protected $questionModel;
 
     protected $examId;
+    protected $firstQuestionId;
 
 
     public function __construct() {
@@ -116,22 +119,32 @@ class ExamController {
         
         $metaData["author_id"] = 1;
         $metaData["questions_count"] = count($sortedQuestions);
+        
+        try {
 
-        // inspect($metaData, false);
-        // inspect($questions, false);
-        // inspect($answers, false);
-        // inspect($sortedQuestions, false);
-        // inspect($sortedAnswers, false);
-        
-        // Begin Transaction
-        
-        $this->examModel->save($metaData);
-        
-        $this->examId = $this->examModel->lastInsertId();
-                
-        $this->questionModel->saveMany($sortedQuestions, $this->examId);
-        
-        // $this->answerModel->saveMany($sortedAnswers);
+            // Begin Transaction
+            $this->db->conn->beginTransaction();
+
+            $this->examModel->save($metaData);
+            
+            $this->examId = $this->examModel->lastInsertId();
+            
+            $this->questionModel->saveMany($sortedQuestions, $this->examId);
+                        
+            $this->firstQuestionId = $this->questionModel->lastInsertId();
+
+            $this->answerModel->saveMany($sortedAnswers, $this->firstQuestionId);
+
+            // Commit Transaction
+            $this->db->conn->commit();
+            
+        } catch (PDOException $e) {
+
+            // RollBack, revert to autocommit mode
+            $this->db->conn->rollback();
+            
+            throw new Exception("Failed to perform Transaction.\nError Message: {$e->getMessage()}");
+        }        
 
         echo "Heloo";
 

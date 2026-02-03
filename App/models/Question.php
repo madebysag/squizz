@@ -24,14 +24,10 @@ class Question extends Model {
 
             $params = [...$params, ...$question];
             $params[] = $examId;
-            // inspect($question, false);
         }
-        inspect($questionArray, false);
-        inspect($params, false);
-        // inspect($queryValuesString);
         
         $params = array_values($params); 
-        // inspect($params, false);
+
         $queryValuesString = trim($queryValuesString, ",");
         
         $this->db->query("INSERT INTO `questions` (type, body, picture_url, exam_id) VALUES {$queryValuesString}", $params, false);

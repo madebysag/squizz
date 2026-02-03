@@ -20,12 +20,15 @@ class Answer extends Model{
         $this->db->query("INSERT INTO `answers` (body, question_id) VALUES (:body, :question_id)", $params);
     }
 
-    public function saveMany(array $answerArray) {
+    public function saveMany(array $answerArray, int $firstQuestionId) {
 
         $queryValuesString = "";
         $params = [];
 
-        foreach($answerArray as $questionId => $answers) {
+        $currentQuestionId = $firstQuestionId;
+
+
+        foreach($answerArray as $questionNumber => $answers) {
 
             foreach($answers as $option => $body) {
 
@@ -40,23 +43,24 @@ class Answer extends Model{
 
                 } else if(count($answers) == 1) { // Handle setting correct answer for true or false questions
                     $params[] = 1;
-                    $params[] = $questionId;
+                    $params[] = $currentQuestionId;
                     $params[] = $body;
                 } else { // Hanlde non correct answers
                     $params[] = 0;
-                    $params[] = $questionId;
+                    $params[] = $currentQuestionId;
                     $params[] = $body;
                 }
 
                 // Add (? , ?) to query string
                 $queryValuesString .= "(?, ?, ?),";
-
+                
             }
+
+            // Increment the ID after each question
+            $currentQuestionId++;
         }
 
         $queryValuesString = trim($queryValuesString, ",");
-        // inspect($queryValuesString, false);
-        // inspect($params, false);
         
         $this->db->query("INSERT INTO `answers` (is_correct, question_id, body) VALUES {$queryValuesString}", $params, false);
     }
