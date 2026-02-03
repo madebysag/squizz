@@ -6,6 +6,8 @@ use Framework\Database;
 
 class HomeController {
 
+    protected $db;
+
     public function __construct() {
 
         $config = require basePath("config/db.php");

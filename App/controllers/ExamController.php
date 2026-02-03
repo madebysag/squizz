@@ -4,15 +4,19 @@ namespace App\Controllers;
 
 use Framework\Database;
 use Framework\Sorter;
+
+use App\Models\User;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
+
 use PDOException;
 use Exception;
 
 class ExamController {
     protected $db;
 
+    protected $userModel;
     protected $examModel;
     protected $answerModel;
     protected $questionModel;

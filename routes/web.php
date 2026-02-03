@@ -10,6 +10,10 @@ $router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is 
 $router->post("/exams", "ExamController@store");  // Upload a new exam
 $router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
 
+$router->get("/users/create", "UserController@create"); //  show Form where new students or tutor are created # 
+$router->post("/users", "UserController@store"); //  Create new student or tutor # 
+// $router->get("/users/{id}/results", "UserController@results"); //  show Form where new students or tutor are created # 
+
 
 
 // $router->post("/auth/exams/write", "ExamController@getExam"); // Get exam
