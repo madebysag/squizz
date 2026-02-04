@@ -40,4 +40,9 @@ class Validator {
         return true;
     }
     
+    public static function password(string $password) : bool {
+        if (!self::string($password, 8)) return false;
+
+        return true;
+    }
 }

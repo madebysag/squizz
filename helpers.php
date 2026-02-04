@@ -44,7 +44,7 @@ function loadView(string $name, array $data = []) {
 
     $viewPath = basePath("App/views/{$name}.view.php");
 
-    if (file_exists($viewPath)) {
+    if (file_exists((string) $viewPath)) {
         extract($data);
         require $viewPath;
     } else {

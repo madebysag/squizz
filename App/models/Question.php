@@ -6,6 +6,9 @@ use App\Models\Base\Model;
 
 class Question extends Model {
 
+    protected string $tableName = "questions";
+
+
     /*
     public function save(array $params) {
         

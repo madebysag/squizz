@@ -20,25 +20,43 @@
             </div>
 
             <div class="input-group">
-                <label for="name" class="text-sm">Full Name - surname last*</label>
-                <input type="text" name="name" id="name" >
+                <label for="name" class="text-sm">Full Name - firstname first*</label>
+                <input type="text" name="name" id="name" value="<?= $user["name"] ?? "" ?>" >
+
+                <?php if (isset($error["name"])) : ?>
+                    <div class='error'><?= $error["name"] ?></div>
+                <?php endif; ?>            
+            
             </div>
             
             <div class="input-group">
                 <label for="email" class="text-sm">Email</label>
-                <input type="text" name="email" id="email" >
+                <input type="email" name="email" id="email" value="<?= $user["email"] ?? "" ?>">
+
+                <?php if (isset($error["email"])) : ?>
+                    <div class='error'><?= $error["email"] ?></div>
+                <?php endif; ?>
+
             </div>
             
             <div class="input-group">
                 <label for="password" class="text-sm">Password</label>
                 <input type="password" name="password" id="password" >
-                <!-- <div class="error">Invalid Credentials</div> -->
+
+                <?php if (isset($error["password"])) : ?>
+                    <div class='error'><?= $error["password"] ?></div>
+                <?php endif; ?>
+
             </div>
             
             <div class="input-group">
                 <label for="password2" class="text-sm">Confirm Password</label>
                 <input type="password" name="password2" id="password2" >
-                <!-- <div class="error">Invalid Credentials</div> -->
+
+                <?php if (isset($error["password2"])) : ?>
+                    <div class='error'><?= $error["password2"] ?></div>
+                <?php endif; ?>  
+
             </div>
             <button type="submit" class="submit btn-primary">Register <b>>></b></button>
         </form>

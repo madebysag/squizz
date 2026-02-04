@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Base\Model;
 
 class Exam extends Model{
+    protected string $tableName = "exams";
 
     public function all(int $limit) {
     }

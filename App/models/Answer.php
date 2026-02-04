@@ -6,6 +6,9 @@ use App\Models\Base\Model;
 
 class Answer extends Model{
 
+    protected string $tableName = "answers";
+
+
     public function findByQuestion(string $questionId) {
 
         $params = [
