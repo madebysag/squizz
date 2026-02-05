@@ -8,11 +8,14 @@ $router->get("/exams/create", "ExamController@create"); //  show Form where new 
 $router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is entered to take exam #
 
 $router->post("/exams", "ExamController@store");  // Upload a new exam
-$router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
+// $router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
 
-$router->get("/users/create", "UserController@create"); //  show Form where new students or tutor are created # 
-$router->post("/users", "UserController@store"); //  Create new student or tutor # 
+$router->get("auth/users/register", "UserController@create"); //  show Form where new students or tutor are created # 
+$router->post("auth/users/register", "UserController@store"); //  Create new student or tutor # 
 // $router->get("/users/{id}/results", "UserController@results"); //  show Form where new students or tutor are created # 
+
+$router->get("auth/organisations/register", "OrganisationController@create"); //  show Form where new students or tutor are created # 
+$router->post("auth/organisations/register", "OrganisationController@store"); //  Create new student or tutor # 
 
 
 

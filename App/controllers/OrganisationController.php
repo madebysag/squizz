@@ -4,21 +4,21 @@ namespace App\Controllers;
 
 use Framework\Database;
 
-use App\Models\User;
+use App\Models\Organisation;
 use Framework\Validator;
 
-class UserController {
+class OrganisationController {
 
     protected $db;
 
-    protected $userModel;
+    protected $organisationModel;
 
     public function __construct() {
 
         $config = require basePath("config/db.php");
         $this->db = new Database($config);
 
-        $this->userModel = new User($this->db);
+        $this->organisationModel = new Organisation($this->db);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController {
      */
     public function create () : void {
 
-        loadView("users/create");
+        loadView("users/organisations/create");
     }
 
 
@@ -35,11 +35,14 @@ class UserController {
 
         $error = [];
 
-        if (!Validator::name($_POST["name"]))    
-            $error["name"] = "Firstname and lastname should be 2 to 55 characters";
+        if (!Validator::string($_POST["name"], 2, 100))    
+            $error["name"] = "Name should be 2 to 100 characters";
         
         if (!Validator::email($_POST["email"]))    
             $error["email"] = "Enter a valid email";
+
+        if (!Validator::string($_POST["address"], 2, 255))    
+            $error["address"] = "Address should be 2 to 255 characters";
         
         if (!Validator::password($_POST["password"]))    
             $error["password"] = "Password too short!";
@@ -49,11 +52,12 @@ class UserController {
 
 
         if(!empty($error)) {
-            loadView("users/create", [
+            loadView("users/organisations/create", [
                 "error" => $error,
                 "user" => [
                     "name" => $_POST["name"],
                     "email" => $_POST["email"],
+                    "address" => $_POST["address"],
                 ]
             ]);
             
@@ -64,14 +68,13 @@ class UserController {
         $params = [
             "name" => $_POST["name"],
             "email" => $_POST["email"],
-            "role" => $_POST["role"],
+            "address" => $_POST["address"],
             "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
-            "organisation_id" => 1 # Get this from session when user authenticates
         ];
 
-        $this->userModel->save($params);
+        $this->organisationModel->save($params);
 
-        $newUserId = $this->userModel->lastInsertId();
+        $newOrganisationId = $this->organisationModel->lastInsertId();
 
         redirect("/");
 

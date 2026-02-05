@@ -5,22 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/Student_Login.css">
-    <title>Register New User</title>
+    <title>Register New Organisation</title>
 </head>
 <body>
     <main>
-        <form action="/auth/users/register" method="POST">
-            <p class="text-lg text-condensed">Register New User</p>
-            <div class="input-group">
-                <label for="role" class="text-sm">Role</label>
-                <select name="role" id="role">
-                    <option value="student">Student</option>
-                    <option value="tutor">Tutor</option>
-                </select>
-            </div>
+        <form action="/auth/organisations/register" method="POST">
+            <p class="text-lg text-condensed">Register New Organisation</p>
 
             <div class="input-group">
-                <label for="name" class="text-sm">Full Name - firstname first*</label>
+                <label for="name" class="text-sm">Oragnisation's Name</label>
                 <input type="text" name="name" id="name" value="<?= $user["name"] ?? "" ?>" >
 
                 <?php if (isset($error["name"])) : ?>
@@ -39,6 +32,16 @@
 
             </div>
             
+            <div class="input-group">
+                <label for="address" class="text-sm">Address</label>
+                <input type="text" name="address" id="address" value="<?= $user["address"] ?? "" ?>">
+
+                <?php if (isset($error["address"])) : ?>
+                    <div class='error'><?= $error["address"] ?></div>
+                <?php endif; ?>
+
+            </div>
+
             <div class="input-group">
                 <label for="password" class="text-sm">Password</label>
                 <input type="password" name="password" id="password" >

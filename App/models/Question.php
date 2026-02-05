@@ -8,14 +8,6 @@ class Question extends Model {
 
     protected string $tableName = "questions";
 
-
-    /*
-    public function save(array $params) {
-        
-        $this->db->query("INSERT INTO `answers` (body, question_id) VALUES (:body, :question_id)", $params);
-    }
-    */
-
     public function saveMany(array $questionArray, int $examId) {
 
         $queryValuesString = "";

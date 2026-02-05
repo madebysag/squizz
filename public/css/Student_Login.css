@@ -35,7 +35,9 @@ main > form > .input-group {
     width: 100%;
 }
 
-main > form > .input-group > input[type="text"] {
+main > form > .input-group > input[type="text"],
+main > form > .input-group > input[type="password"],
+main > form > .input-group > input[type="email"] {
     background-color: var(--white);
 }
 

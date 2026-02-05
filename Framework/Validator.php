@@ -42,6 +42,7 @@ class Validator {
     
     public static function password(string $password) : bool {
         if (!self::string($password, 8)) return false;
+        // $password_regex = "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/"; # Make sure at least one nimber is there
 
         return true;
     }
