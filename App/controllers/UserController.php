@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Framework\Database;
 
 use App\Models\User;
+use Framework\Session;
 use Framework\Validator;
 
 class UserController {
@@ -30,6 +31,7 @@ class UserController {
         loadView("users/create");
     }
 
+    
 
     public function store () : void {
 
@@ -73,8 +75,111 @@ class UserController {
 
         $newUserId = $this->userModel->lastInsertId();
 
+        Session::set("user", [
+            "id" => $newUserId,
+            "name" => $params["name"],
+            "email" => $params["email"],
+            "role" => $params["role"],
+            "organisation_id" => $params["organisation_id"]
+        ]);
+
+
         redirect("/");
 
         exit;
+    }
+
+
+    /**
+     * Log in both Student and Tutor
+     */
+    public function login() : void {
+
+        loadView("users/login");
+    }
+
+    /**
+     * Log in both Student and Tutor
+     */
+    public function authenticate() {
+
+        $error = [];
+        
+        if (!Validator::email($_POST["email"]))    
+            $error["email"] = "Please enter a valid email!";
+        
+        if (!Validator::password($_POST["password"]))    
+            $error["password"] = "Password too short!";
+
+
+        if(!empty($error)) {
+            loadView("users/login", [
+                "error" => $error,
+                "user" => [
+                    "email" => $_POST["email"],
+                ]
+            ]);
+            
+            return;
+        }
+
+        // Check user in database
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        $user = $this->userModel->find($email, "email");
+
+        // No User found
+        if(!$user) {
+
+            $error["password"] = "Invalid Credentials";
+
+            loadView("users/login", [
+                "error" => $error,
+                "user" => [
+                    "email" => $email,
+                ]
+            ]);
+            
+            return;
+        }
+
+        // Wrong password
+        if(!password_verify($password, $user->password)) {
+
+            $error["password"] = "Invalid Credentials";
+
+            loadView("users/login", [
+                "error" => $error,
+                "user" => [
+                    "email" => $email,
+                ]
+            ]);
+            
+            return;
+        }
+
+        Session::set("user", [
+            "id" => $user->id,
+            "name" => $user->name,
+            "email" => $user->email,
+            "role" => $user->role,
+            "organisation_id" => $user->organisation_id
+        ]);
+
+        redirect("/");
+
+        exit;
+    }
+
+    public function logout() {
+
+        Session::clearAll();
+
+        $params = session_get_cookie_params();
+
+        setcookie("PHPSESSID", "", time() - 86400, $params["path"], $params["domain"]);
+
+        redirect("/");
     }
 }

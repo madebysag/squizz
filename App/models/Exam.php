@@ -7,17 +7,6 @@ use App\Models\Base\Model;
 class Exam extends Model{
     protected string $tableName = "exams";
 
-    public function all(int $limit) {
-    }
-
-    public function findByKey(string $key) {
-
-        $params = [
-            "key" => $key
-        ];
-
-        return $this->db->query("SELECT * FROM `exams` WHERE `exam_key` = :key; ", $params)->fetch();
-    }
     
     public function save(array $params) {
         

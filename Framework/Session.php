@@ -13,7 +13,7 @@ class Session {
             session_start();
     }
 
-    public static function set(string $key, string $value) : void {
+    public static function set(string $key, mixed $value) : void {
         $_SESSION[$key] = $value;
     }
 

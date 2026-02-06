@@ -8,6 +8,9 @@ $dotenv->load();
 require "../helpers.php";
 
 use Framework\Router;
+use Framework\Session;
+
+Session::start();
 
 $router = new Router();
 

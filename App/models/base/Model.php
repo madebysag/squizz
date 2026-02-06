@@ -13,8 +13,8 @@ class Model {
         $this->db = $db;
     }
 
-    public function find(int $id) {
-        return $this->db->query("SELECT * FROM `{$this->tableName}` WHERE id = :id;", [ "id" => $id])->fetch();
+    public function find($value, $columnName = "id") {
+        return $this->db->query("SELECT * FROM `{$this->tableName}` WHERE {$columnName} = :{$columnName};", [ "{$columnName}" => $value])->fetch();
     }
 
     public function lastInsertId() {

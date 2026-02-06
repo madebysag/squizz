@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/Student_Login.css">
-    <title>Login as Admin</title>
+    <title>Login</title>
 </head>
 <body>
     <main>
-        <form action="/auth/organisations/login" method="POST">
-            <p class="text-lg text-condensed">Login as Organisation Admin</p>
+        <form action="/auth/users/login" method="POST">
+            <p class="text-lg text-condensed">Login</p>
             
             <div class="input-group">
                 <label for="email" class="text-sm">Email</label>

@@ -10,12 +10,20 @@ $router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is 
 $router->post("/exams", "ExamController@store");  // Upload a new exam
 // $router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
 
-$router->get("auth/users/register", "UserController@create"); //  show Form where new students or tutor are created # 
-$router->post("auth/users/register", "UserController@store"); //  Create new student or tutor # 
-// $router->get("/users/{id}/results", "UserController@results"); //  show Form where new students or tutor are created # 
+$router->get("auth/users/register", "UserController@create"); //  show Form where new user(student / tutor) or tutor are created # 
+$router->get("auth/users/login", "UserController@login"); //  show user(student / tutor) Login form # 
 
-$router->get("auth/organisations/register", "OrganisationController@create"); //  show Form where new students or tutor are created # 
-$router->post("auth/organisations/register", "OrganisationController@store"); //  Create new student or tutor # 
+$router->post("auth/users/register", "UserController@store");  
+$router->post("auth/users/login", "UserController@authenticate");  
+$router->post("auth/users/logout", "UserController@logout");  
+
+
+$router->get("auth/organisations/register", "OrganisationController@create");  
+$router->get("auth/organisations/login", "OrganisationController@login");  
+
+$router->post("auth/organisations/register", "OrganisationController@store"); 
+$router->post("auth/organisations/login", "OrganisationController@authenticate"); 
+$router->post("auth/organisations/logout", "OrganisationController@logout"); 
 
 
 

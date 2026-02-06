@@ -6,6 +6,7 @@ use Framework\Database;
 
 use App\Models\Organisation;
 use Framework\Validator;
+use Framework\Session;
 
 class OrganisationController {
 
@@ -76,8 +77,107 @@ class OrganisationController {
 
         $newOrganisationId = $this->organisationModel->lastInsertId();
 
+        Session::set("admin", [
+            "id" => $newOrganisationId,
+            "name" => $params["name"],
+            "email" => $params["email"],
+            "address" => $params["address"]
+        ]);
+
         redirect("/");
 
         exit;
+    }
+    
+    /**
+     * Log in both Student and Tutor
+     */
+    public function login() : void {
+
+        loadView("users/organisations/login");
+    }
+
+    /**
+     * Log in both Student and Tutor
+     */
+    public function authenticate() {
+
+        $error = [];
+        
+        if (!Validator::email($_POST["email"]))    
+            $error["email"] = "Please enter a valid email!";
+        
+        if (!Validator::password($_POST["password"]))    
+            $error["password"] = "Password too short!";
+
+
+        if(!empty($error)) {
+            loadView("users/organisations/login", [
+                "error" => $error,
+                "user" => [
+                    "email" => $_POST["email"],
+                ]
+            ]);
+            
+            return;
+        }
+
+        // Check user in database
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        $admin = $this->organisationModel->find($email, "email");
+
+        // No User found
+        if(!$admin) {
+
+            $error["password"] = "Invalid Credentials";
+
+            loadView("users/organisations/login", [
+                "error" => $error,
+                "user" => [
+                    "email" => $email,
+                ]
+            ]);
+            
+            return;
+        }
+
+        // Wrong password
+        if(!password_verify($password, $admin->password)) {
+
+            $error["password"] = "Invalid Credentials";
+
+            loadView("users/organisations/login", [
+                "error" => $error,
+                "user" => [
+                    "email" => $email,
+                ]
+            ]);
+            
+            return;
+        }
+
+        Session::set("admin", [
+            "id" => $admin->id,
+            "name" => $admin->name,
+            "email" => $admin->email,
+            "address" => $admin->address
+        ]);
+
+        redirect("/");
+
+        exit;
+    }
+
+    public function logout() {
+
+        Session::clearAll();
+
+        $params = session_get_cookie_params();
+
+        setcookie("PHPSESSID", "", time() - 86400, $params["path"], $params["domain"]);
+
+        redirect("/");
     }
 }

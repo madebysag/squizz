@@ -136,7 +136,6 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="exam_key" value="key">
             
             <div class="actions">
                 <p class="text-condensed text-muted text-sm">Records</p>

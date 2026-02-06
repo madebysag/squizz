@@ -5,18 +5,17 @@ namespace App\Controllers;
 use Framework\Database;
 use Framework\Sorter;
 
-use App\Models\User;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
 
 use PDOException;
 use Exception;
+use Framework\Session;
 
 class ExamController {
     protected $db;
 
-    protected $userModel;
     protected $examModel;
     protected $answerModel;
     protected $questionModel;
@@ -64,7 +63,7 @@ class ExamController {
             
         } 
 
-        $exam = $this->examModel->findByKey($key);
+        $exam = $this->examModel->find($key, "exam_key");
         
         if (!$exam) {
             
@@ -99,10 +98,6 @@ class ExamController {
      */
     public function store($params) : void {
 
-        // $examFields = ["title", "author_id", "course", "tags", "duration", "start_at", "end_at", "instructions", "questions_count", "exam_key"];
-        // $questionFields = ["body", "picture_url", "correct_answer_id", "exam_id"];
-        // $answerFields = ["body", "question_id"];
-
         $metaData = [];
         $questions = [];
         $answers = [];
@@ -120,9 +115,10 @@ class ExamController {
         
         $sortedQuestions = Sorter::sort($questions);
         $sortedAnswers = Sorter::sort($answers);
-        
-        $metaData["author_id"] = 1;
+
+        $metaData["author_id"] = Session::get("user")["id"];
         $metaData["questions_count"] = count($sortedQuestions);
+        $metaData["exam_key"] = base64_encode(Session::get("user")["name"] . (string) time()); // Name + time created in base 64 is key
         
         try {
 
@@ -150,7 +146,7 @@ class ExamController {
             throw new Exception("Failed to perform Transaction.\nError Message: {$e->getMessage()}");
         }        
 
-        echo "Heloo";
+        redirect("/");
 
     }
 }
