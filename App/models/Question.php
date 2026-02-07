@@ -25,9 +25,6 @@ class Question extends Model {
 
         $queryValuesString = trim($queryValuesString, ",");
 
-        inspect($params, false);
-        inspect($queryValuesString);
-        
         $this->db->query("INSERT INTO `questions` (type, body, picture_url, exam_id) VALUES {$queryValuesString}", $params, false);
     }
 

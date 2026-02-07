@@ -23,7 +23,7 @@
 
                 <!-- Questions -->
                 <div class="question">
-                    <input type="hidden" name="question_type_2" value="A-D">
+                    <input type="hidden" name="question_type_1" value="A-D">
                     <p class="number">
                         <span class="text-muted">Question </span>
                         <b>1</b>
@@ -35,7 +35,7 @@
                         <div class="image"><img src="" alt=""></div>
                     </div>
                     
-                    <label class="btn-secondary upload-image-btn">Upload Picture <input type="file" name="question_image_2" id="question_2_image" accept=".png, .jpeg"></label>
+                    <label class="btn-secondary upload-image-btn">Upload Picture <input type="file" name="question_image_1" id="question_1_image" accept=".png, .jpeg"></label>
 
                     <button type="button" class="btn-secondary delete-uploaded-image">Delete Picture</button>
                         
