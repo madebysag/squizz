@@ -9,7 +9,12 @@
 </head>
 <body>
     <main>
+        <div class="exam-info">
+            <a href="/" class="btn-secondary"><< Back Home</a>
+        </div>
+        
         <form action="/auth/users/login" method="POST">
+        
             <p class="text-lg text-condensed">Login</p>
             
             <div class="input-group">

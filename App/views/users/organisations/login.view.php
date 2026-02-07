@@ -9,6 +9,10 @@
 </head>
 <body>
     <main>
+        <div class="exam-info">
+            <a href="/" class="btn-secondary"><< Back Home</a>
+        </div>
+
         <form action="/auth/organisations/login" method="POST">
             <p class="text-lg text-condensed">Login as Organisation Admin</p>
             

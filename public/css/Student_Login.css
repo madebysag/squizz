@@ -9,6 +9,7 @@ main {
 main > .exam-info {
     width: 25rem;
     margin: 1rem 0;
+    text-align: center;
 }
 
 main > .exam-info > * {

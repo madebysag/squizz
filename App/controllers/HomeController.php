@@ -2,16 +2,22 @@
 
 namespace App\Controllers;
 
+use App\Models\Exam;
 use Framework\Database;
+use Framework\Session;
 
 class HomeController {
 
     protected $db;
+    
+    protected $examModel;
 
     public function __construct() {
 
         $config = require basePath("config/db.php");
         $this->db = new Database($config);
+
+        $this->examModel = new Exam($this->db);
     }
 
     /**
@@ -20,7 +26,7 @@ class HomeController {
      */
     public function index () : void {
 
-        $exams = $this->db->query("SELECT * FROM `exams` WHERE `exams` . `accessibility` = 'public'")->fetchAll();
+        $exams = $this->examModel->findMany("public", "accessibility");
 
         if (!$exams) {
             
@@ -30,9 +36,13 @@ class HomeController {
 
             return;
         }
+
+        // Get user from session if exists
+        $user = Session::get("user");
         
         loadView("public", [
-            "exams" => $exams
+            "exams" => $exams,
+            "user" => $user
         ]);
 
         return;

@@ -17,6 +17,12 @@ class Model {
         return $this->db->query("SELECT * FROM `{$this->tableName}` WHERE {$columnName} = :{$columnName};", [ "{$columnName}" => $value])->fetch();
     }
 
+    public function findMany($value, $columnName = "id", $limit = 10, $order = "DESC") {
+
+        #   SELECT * FROM `exams` WHERE accessibility = "public" ORDER BY created_at DESC LIMIT 10;
+        return $this->db->query("SELECT * FROM `{$this->tableName}` WHERE {$columnName} = :{$columnName} ORDER BY created_at {$order} LIMIT {$limit};", [ "{$columnName}" => $value])->fetchAll();
+    }
+
     public function lastInsertId() {
         return $this->db->query("SELECT LAST_INSERT_ID();")->fetchColumn();
     }

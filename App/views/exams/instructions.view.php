@@ -11,7 +11,7 @@
     <main>
         <div class="exam-info">
             <p class="title text-condensed text-md"><?= $exam->title ?></p>
-            <p class="author text-sm">by - <?= $exam->author ?></p>
+            <p class="author text-sm">by - <?= $exam->author ?? "Anonymous" ?></p>
         </div>
         
         <div class="exam-info">

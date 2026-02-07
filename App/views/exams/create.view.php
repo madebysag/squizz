@@ -111,7 +111,7 @@
                         <input type="text" name="tags" class="text-sm" id="exam_tags">
 
                         <label for="exam_author" class="text-condensed text-muted text-sm">Show Author's Name</label>
-                        <input type="checkbox" name="author_id" value="id" class="text-sm" id="exam_author">
+                        <input type="checkbox" name="show_author" value="1" class="text-sm" id="exam_author">
                         
                     </div>
                     

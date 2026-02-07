@@ -1,8 +1,19 @@
 main {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
+}
+
+main > .exam-info {
+    width: 25rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+main > .exam-info > * {
+    padding: 0.2rem 0;
 }
 
 main > form {

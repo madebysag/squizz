@@ -10,8 +10,22 @@
 <body>
     <header>
         <div class="header">
-            <p class="text-condensed text-sm">MrQundus</p>
-            <a href="#" class="btn-secondary">Logout</a>
+            <?php if(isset($user)) : ?>
+
+                <p class="text-condensed text-sm">Hello <?= explode(" ", $user["name"])[0] ?></p>
+
+                <form action="/auth/users/logout" method="POST">
+                    <button type="submit" class="btn-secondary">Log out</button>
+                </form>
+
+            <?php else: ?>
+                    
+                <p class="text-condensed text-sm">Hello there, take some Squizz!</p>
+                
+                <a href="/auth/users/login" class="btn-secondary">Log in</a>
+
+            <?php endif; ?>
+
         </div>
         <div class="search-container">
             <p class="text-condensed">Public Exams </p>
@@ -19,7 +33,17 @@
                 <form action="">
                     <input type="text" name="search_exam" id="search_exam" placeholder="Search by Tags, Title, Keywords...">
                 </form>
-                <a href="/exams/write" class="btn-primary">Take Private Exam</a>
+
+                <?php if (isset($user) && $user["role"] == "tutor") : ?>
+
+                    <a href="/exams/create" class="btn-primary">Create Exam</a>
+
+                <?php else : ?>
+
+                    <a href="/exams/write" class="btn-primary">Take Private Exam</a>
+
+                <?php endif; ?>
+
             </div>
         </div>
     </header>

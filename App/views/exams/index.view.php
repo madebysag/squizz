@@ -9,7 +9,12 @@
 </head>
 <body>
     <main>
+        <div class="exam-info">
+            <a href="/" class="btn-secondary"><< Back Home</a>
+        </div>
+
         <form action="/exams/write" method="POST">
+
             <p class="text-lg text-condensed">Take an Exam</p>
             <div class="input-group">
                 <label for="exam" class="text-sm">Exam Key</label>
