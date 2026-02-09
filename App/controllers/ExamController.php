@@ -118,7 +118,8 @@ class ExamController {
 
         $metaData["author_id"] = Session::get("user")["id"];
         $metaData["questions_count"] = count($sortedQuestions);
-        $metaData["exam_key"] = base64_encode(Session::get("user")["name"] . (string) time()); // Name + time created in base 64 is key
+        $metaData["exam_key"] = hash("crc32b", Session::get("user")["name"] . (string) time()); // Name + time created in base 64 is key
+        // $metaData["exam_key"] = base64_encode(Session::get("user")["name"] . (string) time()); // Name + time created in base 64 is key
 
         try {
 

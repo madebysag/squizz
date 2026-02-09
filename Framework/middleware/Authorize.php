@@ -21,11 +21,6 @@ class Authorize {
      */
     public static function isAuthenticated($userType = "user", $role = "student") : bool {
 
-        // if (isset(Session::get($userType))) {
-
-        // }
-        // inspect(Session::has($userType));
-
         if (Session::has($userType)) {
 
             if ($userType == "user") {
