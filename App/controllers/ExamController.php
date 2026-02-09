@@ -146,7 +146,11 @@ class ExamController {
             throw new Exception("Failed to perform Transaction.\nError Message: {$e->getMessage()}");
         }        
 
-        redirect("/");
+        redirect("/exams/list");
 
+    }
+
+    public function list() {
+        loadView("exam/list");
     }
 }

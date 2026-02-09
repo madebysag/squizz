@@ -2,6 +2,7 @@
 
 namespace Framework;
 
+use Framework\Middleware\Authorize;
 use App\Controllers\ErrorController;
 
 class Router {
@@ -79,6 +80,10 @@ class Router {
                 }
 
                 if ($match) {
+
+                    foreach($route["middleware"] as $middleware) {
+                        Authorize::handle($middleware);
+                    }
 
                     $controller = "App\\Controllers\\" . $route["controller"];
                     $controllerMethod =  $route["controllerMethod"];

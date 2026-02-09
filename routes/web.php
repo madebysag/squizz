@@ -2,28 +2,30 @@
 
 $router->get("/", "HomeController@index");  //  List all Public exams #
 
-$router->get("/exams/write", "ExamController@index"); //  Where exam key is entered to take exam  #
-$router->get("/exams/create", "ExamController@create"); //  show Form where new exams are uploaded # 
+$router->get("/exams/write", "ExamController@index", ["student"]); //  Where exam key is entered to take exam  #
+$router->get("/exams/create", "ExamController@create", ["tutor"]); //  show Form where new exams are uploaded # 
+$router->get("/exams/list", "ExamController@list", ["tutor"]); //  Show all exams uploaded by tutor # 
 
-$router->post("/exams/write", "ExamController@checkKey"); //  Where exam key is entered to take exam #
+$router->post("/exams/write", "ExamController@checkKey", ["student"]); //  Where exam key is entered to take exam #
 
-$router->post("/exams", "ExamController@store");  // Upload a new exam
-// $router->get("/exams/{id}", "ExamController@show");   // Get an uploaded exam
+$router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exam
 
-$router->get("auth/users/register", "UserController@create"); //  show Form where new user(student / tutor) or tutor are created # 
-$router->get("auth/users/login", "UserController@login"); //  show user(student / tutor) Login form # 
+$router->get("/exams/users/results", "ResultController@show", ["student"]); //  Show results for all exam taken by student #
 
-$router->post("auth/users/register", "UserController@store");  
-$router->post("auth/users/login", "UserController@authenticate");  
-$router->post("auth/users/logout", "UserController@logout");  
+$router->get("auth/users/register", "UserController@create", ["org"]); //  show Form where new user(student / tutor) or tutor are created # 
+$router->get("auth/users/login", "UserController@login", ["guest"]); //  show user(student / tutor) Login form # 
+
+$router->post("auth/users/register", "UserController@store", ["org"]);  
+$router->post("auth/users/login", "UserController@authenticate", ["guest"]);  
+$router->post("auth/users/logout", "UserController@logout", ["student", "tutor" ]);  
 
 
-$router->get("auth/organisations/register", "OrganisationController@create");  
-$router->get("auth/organisations/login", "OrganisationController@login");  
+$router->get("auth/organisations/register", "OrganisationController@create", ["guest"]);  
+$router->get("auth/organisations/login", "OrganisationController@login", ["guest"]);  
 
-$router->post("auth/organisations/register", "OrganisationController@store"); 
-$router->post("auth/organisations/login", "OrganisationController@authenticate"); 
-$router->post("auth/organisations/logout", "OrganisationController@logout"); 
+$router->post("auth/organisations/register", "OrganisationController@store", ["guest"]); 
+$router->post("auth/organisations/login", "OrganisationController@authenticate", ["guest"]); 
+$router->post("auth/organisations/logout", "OrganisationController@logout", ["org"]); 
 
 
 
