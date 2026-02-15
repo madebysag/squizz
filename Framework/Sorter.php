@@ -83,6 +83,6 @@ class Sorter {
         }
 
 
-        inspect($sortedQuestions); 
+        return $sortedQuestions; 
     }
 }

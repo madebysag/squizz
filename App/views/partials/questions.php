@@ -1,59 +1,82 @@
 <?php
 $pointer = 0;
 
-$questions = array_keys($questions);
-$questionIds = array_values($questions);
-$answers = array_keys($answers);
-$questionIds = array_values($answers);
+$options = [];
+
+
 
 
 ?>
 
-<?php foreach($questions as $id => $body) : ?>
-<div class="question-container active" id="question_1">
+<?php foreach($questions as $question) : ?>
 
-    <section class="question">
-        <p class="number">
-            <span class="text-muted">Question </span>
-            <b class="md">1</b>
-        </p>
-        <div class="question-body">
-            <p class="text md">What is the best mesthod to center a div?</p>
-            <div class="image"><img src="" alt=""></div>
-        </div>
-            
-    </section>
+    <?php 
 
+        $pointer = 0;
 
-    <section class="answers">
+        switch ($question->type) {
+            case 'A-D':
+                $options = ["A", "B", "C", "D"];
+                break;
         
-        <button type="button" class="btn-primary">Clear choices</button>
+            case 'A-E':
+                $options = ["A", "B", "C", "D", "E"];
+                break;
+            
+            default:
+                $options = ["T", "F"];
+                break;
+        }    
+    ?>
 
-        <input type="radio" name="q1" id="q1a">
-        <label class="option md" for="q1a">
-            <span class="text-lg">A</span>
-            Using flex box, place-items and justify-contents.
-        </label>
 
-        <input type="radio" name="q1" id="q1b">
-        <label class="option md" for="q1b">
-            <span class="text-lg">B</span>
-            Using flex box, place-items and justify-contents.
-        </label>
+    <div class="question-container <?= $question->number == 1 ? "active" : "" ?>" id="question_<?= $question->number ?>">
 
-        <input type="radio" name="q1" id="q1c">
-        <label class="option md" for="q1c">
-            <span class="text-lg">C</span>
-            Using flex box, place-items and justify-contents. Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, ab! Quam vel aliquam necessitatibus debitis dolores cupiditate dolor qui temporibus animi accusantium ad, porro nesciunt ipsa harum id quae quisquam.
-        </label>
+        <section class="question">
+            <p class="number">
+                <span class="text-muted">Question </span>
+                <b class="md"><?= $question->number ?></b>
+            </p>
+            <div class="question-body">
+                <p class="text md"><?= $question->body ?></p>
+                <div class="image"><img src="<?= $question->picture_url ?>" alt=""></div>
+            </div>
+                
+        </section>
 
-        <input type="radio" name="q1" id="q1d">
-        <label class="option md" for="q1d">
-            <span class="text-lg">D</span>
-            Using flex box, place-items and justify-contents.
-        </label>
 
-    </section>
+        <section class="answers">
+            
+            <button type="button" class="btn-primary">Clear choices</button>
+
+            <!-- Option Code Starts here -->
+            <?php if ($question->type == "T/F") : ?> 
+                True of false            
+                
+            <?php else : ?>
     
-</div>
+                <?php foreach($question->answers as $answer) : ?>
+                    
+                    <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[$pointer]) ?>">
+
+                    <label class="option md" for="q<?= $question->number . strtolower($options[$pointer]) ?>">
+
+                        <span class="text-lg"><?= $options[$pointer] ?></span>
+
+                        <?= $answer->body ?>
+                        
+                    </label>
+                    
+                    <?php $pointer++  ?>
+
+                <?php endforeach; ?>
+            
+            <?php endif; ?>
+
+            <!-- Option Code Ends here -->
+
+        </section>
+        
+    </div>
+
 <?php endforeach; ?>

@@ -12,7 +12,7 @@
 
     <header>
         <div class="timer-container">
-            <p data-total-minutes="1" class="timer text-condensed text-xl">00:00:00</p>
+            <p data-total-minutes="<?= $exam->duration ?>" class="timer text-condensed text-xl">00:00:00</p>
         </div>
         <div class="progress-container">
 
@@ -35,148 +35,10 @@
     <main>
 
         <form action="">
-            <?= loadPartial("questions") ?>
-
-            <div class="question-container active" id="question_1">
-
-                <section class="question">
-                    <p class="number">
-                        <span class="text-muted">Question </span>
-                        <b class="md">1</b>
-                    </p>
-                    <div class="question-body">
-                        <p class="text md">What is the best mesthod to center a div?</p>
-                        <div class="image"><img src="" alt=""></div>
-                    </div>
-                        
-                </section>
-
-            
-                <section class="answers">
-                    
-                    <button type="button" class="btn-primary">Clear choices</button>
-
-                    <input type="radio" name="q1" id="q1a">
-                    <label class="option md" for="q1a">
-                        <span class="text-lg">A</span>
-                        Using flex box, place-items and justify-contents.
-                    </label>
-
-                    <input type="radio" name="q1" id="q1b">
-                    <label class="option md" for="q1b">
-                        <span class="text-lg">B</span>
-                        Using flex box, place-items and justify-contents.
-                    </label>
-
-                    <input type="radio" name="q1" id="q1c">
-                    <label class="option md" for="q1c">
-                        <span class="text-lg">C</span>
-                        Using flex box, place-items and justify-contents. Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, ab! Quam vel aliquam necessitatibus debitis dolores cupiditate dolor qui temporibus animi accusantium ad, porro nesciunt ipsa harum id quae quisquam.
-                    </label>
-
-                    <input type="radio" name="q1" id="q1d">
-                    <label class="option md" for="q1d">
-                        <span class="text-lg">D</span>
-                        Using flex box, place-items and justify-contents.
-                    </label>
-
-                </section>
-                
-            </div>
-
-            <div class="question-container" id="question_2">
-
-                <section class="question">
-                    <p class="number">
-                        <span class="text-muted">Question </span>
-                        <b class="md">2</b>
-                    </p>
-                    <div class="question-body">
-                        <p class="text md">What is the best Option in this regime?</p>
-                        <div class="image"><img src="" alt=""></div>
-                    </div>
-                        
-                </section>
-
-            
-                <section class="answers">
-                    
-                    <button type="button" class="btn-primary">Clear choices</button>
-
-                    <input type="radio" name="q2" id="q2a">
-                    <label class="option md" for="q2a">
-                        <span class="text-lg">A</span>
-                        Should it not hvae been this.
-                    </label>
-
-                    <input type="radio" name="q2" id="q2b">
-                    <label class="option md" for="q2b">
-                        <span class="text-lg">B</span>
-                        Should be not this.
-                    </label>
-
-                    <input type="radio" name="q2" id="q2c">
-                    <label class="option md" for="q2c">
-                        <span class="text-lg">C</span>
-                        Option is this
-                    </label>
-
-                    <input type="radio" name="q2" id="q2d">
-                    <label class="option md" for="q2d">
-                        <span class="text-lg">D</span>
-                        Not always this.
-                    </label>
-
-                </section>
-                
-            </div>
-
-            <div class="question-container" id="question_3">
-
-                <section class="question">
-                    <p class="number">
-                        <span class="text-muted">Question </span>
-                        <b class="md">3</b>
-                    </p>
-                    <div class="question-body">
-                        <p class="text md">How many times can you jump?</p>
-                        <div class="image"><img src="" alt=""></div>
-                    </div>
-                        
-                </section>
-
-            
-                <section class="answers">
-                    
-                    <button type="button" class="btn-primary">Clear choices</button>
-
-                    <input type="radio" name="q3" id="q3a">
-                    <label class="option md" for="q3a">
-                        <span class="text-lg">A</span>
-                        Just once.
-                    </label>
-
-                    <input type="radio" name="q3" id="q3b">
-                    <label class="option md" for="q3b">
-                        <span class="text-lg">B</span>
-                        Twice on a good day.
-                    </label>
-
-                    <input type="radio" name="q3" id="q3c">
-                    <label class="option md" for="q3c">
-                        <span class="text-lg">C</span>
-                        Three times when I am scared
-                    </label>
-
-                    <input type="radio" name="q3" id="q3d">
-                    <label class="option md" for="q3d">
-                        <span class="text-lg">D</span>
-                        More than four times when I won
-                    </label>
-
-                </section>
-                
-            </div>
+            <?= loadPartial("questions", [
+                "exam" => $exam,
+                "questions" => $questions
+            ]) ?>
 
             <!-- Finish Attempt Section -->
              <div class="finish-attempt-container">
