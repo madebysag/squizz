@@ -21,4 +21,13 @@ class ResultController {
     
     loadView("exams/results");
     }
+
+
+    public function store() {
+
+    inspect($_POST, false);
+
+    
+    loadView("exams/finish");
+    }
 }

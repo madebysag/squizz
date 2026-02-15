@@ -24,7 +24,7 @@ $options = [];
                 break;
             
             default:
-                $options = ["T", "F"];
+                $options = ["A", "B", "TRUE", "FALSE"]; // For True and False questions
                 break;
         }    
     ?>
@@ -51,13 +51,32 @@ $options = [];
 
             <!-- Option Code Starts here -->
             <?php if ($question->type == "T/F") : ?> 
-                True of false            
+                
+                <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[0]) ?>" />
+
+                    <label class="option md" for="q<?= $question->number . strtolower($options[0]) ?>">
+
+                        <span class="text-lg"><?= $options[0] ?></span>
+
+                        <?= $options[2] ?>
+                        
+                </label>            
+
+                <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[1]) ?>">
+
+                    <label class="option md" for="q<?= $question->number . strtolower($options[1]) ?>">
+
+                        <span class="text-lg"><?= $options[1] ?></span>
+
+                        <?= $options[3] ?>
+                        
+                </label>            
                 
             <?php else : ?>
     
                 <?php foreach($question->answers as $answer) : ?>
                     
-                    <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[$pointer]) ?>">
+                    <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[$pointer]) ?>" />
 
                     <label class="option md" for="q<?= $question->number . strtolower($options[$pointer]) ?>">
 
