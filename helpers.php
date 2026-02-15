@@ -52,6 +52,26 @@ function loadView(string $name, array $data = []) {
     }
 }
 
+/**
+ * Load Partial from the partial folder
+ * 
+ * @param string $name;
+ * @param array $data;
+ * 
+ * @return void; 
+ */
+function loadPartial(string $name, array $data = []) {
+
+    $partialPath = basePath("App/views/partials/{$name}.php");
+
+    if (file_exists((string) $partialPath)) {
+        extract($data);
+        require $partialPath;
+    } else {
+        echo "Partial File does not exist. Fullpath = {$partialPath}";
+    }
+}
+
 
 /**
  * Redirect to a url

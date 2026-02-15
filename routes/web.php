@@ -6,6 +6,8 @@ $router->get("/exams/write", "ExamController@index", ["student"]); //  Where exa
 $router->get("/exams/create", "ExamController@create", ["tutor"]); //  show Form where new exams are uploaded # 
 $router->get("/exams/list", "ExamController@list", ["tutor"]); //  Show all exams uploaded by tutor # 
 
+$router->get("/exams/{key}/start", "ExamController@start", ["student"]); //  Start an exam # 
+
 $router->post("/exams/write", "ExamController@checkKey", ["student"]); //  Where exam key is entered to take exam #
 
 $router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exam

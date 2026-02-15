@@ -10,6 +10,9 @@
 <body>
     <header>
         <div class="header">
+            <?php #inspect($_SESSION, false) ?>
+            <?php #inspect($user, false) ?>
+            <?php #inspect($admin, false) ?>
             <?php if(isset($user)) : ?>
 
                 <p class="text-condensed text-sm">Hello <?= explode(" ", $user["name"])[0] ?></p>
@@ -18,11 +21,22 @@
                     <button type="submit" class="btn-secondary">Log out</button>
                 </form>
 
+            <?php elseif(isset($admin)) : ?>
+
+                <p class="text-condensed text-sm">Hello <?= explode(" ", $admin["name"])[0] ?> administrator</p>
+
+                <form action="/auth/organisations/logout" method="POST">
+                    <button type="submit" class="btn-secondary">Log out</button>
+                </form>
+
             <?php else: ?>
                     
                 <p class="text-condensed text-sm">Hello there, take some Squizz!</p>
                 
-                <a href="/auth/users/login" class="btn-secondary">Log in</a>
+                <div>
+                    <a href="/auth/users/login" class="btn-secondary">Log in</a>
+                    <a href="/auth/organisations/login" class="btn-secondary">Admin Board</a>
+                </div>
 
             <?php endif; ?>
 

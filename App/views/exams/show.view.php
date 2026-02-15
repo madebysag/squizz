@@ -35,6 +35,7 @@
     <main>
 
         <form action="">
+            <?= loadPartial("questions") ?>
 
             <div class="question-container active" id="question_1">
 

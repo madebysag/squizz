@@ -152,6 +152,21 @@ class ExamController {
     }
 
     public function list() {
-        loadView("exam/list");
+        loadView("exams/list");
+    }
+
+    public function start($params) {
+
+        $examDetails = $this->examModel->find($params["key"], "exam_key");
+        
+        // SELECT questions.body, answers.body, answers.id, questions.id, exams.id FROM ((`exams` JOIN questions ON 1 = questions.exam_id) JOIN answers ON questions.id = answers.question_id)
+        
+        $fullExam = $this->examModel->load($examDetails->id);
+        // $sortedExam = Sorter::build($fullExam, $examDetails->questions_count);
+        $sortedExam = Sorter::buildQuestions($fullExam);
+
+        // inspect($sortedExam, false);
+        // inspect($fullExam);
+        loadView("exams/show");
     }
 }

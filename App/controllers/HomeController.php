@@ -28,20 +28,19 @@ class HomeController {
 
         $exams = $this->examModel->findMany("public", "accessibility");
 
-        if (!$exams) {
-            
-            loadView("public", [
-                "error" => "No public exam at the moment!"
-            ]);
+        $error = "";
 
-            return;
-        }
+        // If no exam found
+        if (!$exams)    $error = "No public exam at the moment!";
 
-        // Get user from session if exists
+        // Get user or admin from session if exists
+        $admin = Session::get("admin");
         $user = Session::get("user");
-        
+
         loadView("public", [
+            "error" => $error,
             "exams" => $exams,
+            "admin" => $admin,
             "user" => $user
         ]);
 

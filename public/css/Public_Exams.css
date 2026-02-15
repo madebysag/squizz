@@ -16,6 +16,10 @@ header > .header {
     width:100%;
 }
 
+header > .header > div {
+    padding: 1rem;
+}
+
 header > .search-container {
     display: flex;
     flex-wrap: wrap;
