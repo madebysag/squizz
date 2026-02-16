@@ -16,18 +16,42 @@ class ResultController {
 
     }
 
-    public function show() {
+    /**
+     * Show an exams result taken by student 
+     * 
+     */
+    public function show($key) {
 
-    
-    loadView("exams/results");
+   
+        loadView("exams/results");
+    }
+
+    /**
+     * Show All exams taken by student or authored by a tutor
+     * 
+     */
+    public function showAll(){
+        
+    }
+
+    /**
+     * Submit an exam
+     * 
+     */
+    public function store($key) {
+
+        inspect($_POST, false);
+
+        
+        loadView("exams/finish");
     }
 
 
-    public function store() {
+    /**
+     * Partial submission every 30 seconds
+     * 
+     */
+    public function update($key){
 
-    inspect($_POST, false);
-
-    
-    loadView("exams/finish");
     }
 }

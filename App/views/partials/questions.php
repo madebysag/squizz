@@ -2,8 +2,17 @@
 $pointer = 0;
 
 $options = [];
+/**
+ * Added the $exam->created_at unix timestamp divided 1000 to the values, for obfuscation purposes
+ * 
+ * Correct options are ID + $buffer
+ * 
+ * Incorrect options are $buffers only
+ * 
+ * this solves the issue of null values for fabricated wrong options
+ */
 
-
+$buffer = strtotime($exam->created_at) - 1_000_000;
 
 
 ?>
@@ -52,7 +61,7 @@ $options = [];
             <!-- Option Code Starts here -->
             <?php if ($question->type == "T/F") : ?> 
                 
-                <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[0]) ?>" />
+                <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[0]) ?>" value="<?= $question->answers[0]->body == "T" ? $question->answers[0]->id + $buffer : $buffer ?>"/>
 
                     <label class="option md" for="q<?= $question->number . strtolower($options[0]) ?>">
 
@@ -62,7 +71,7 @@ $options = [];
                         
                 </label>            
 
-                <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[1]) ?>">
+                <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[1]) ?>" value="<?= $question->answers[0]->body == "F" ? $question->answers[0]->id + $buffer : $buffer ?>">
 
                     <label class="option md" for="q<?= $question->number . strtolower($options[1]) ?>">
 
@@ -76,7 +85,7 @@ $options = [];
     
                 <?php foreach($question->answers as $answer) : ?>
                     
-                    <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[$pointer]) ?>" />
+                    <input type="radio" name="q<?= $question->number ?>" id="q<?= $question->number . strtolower($options[$pointer]) ?>" value="<?= $answer->id + $buffer ?>" />
 
                     <label class="option md" for="q<?= $question->number . strtolower($options[$pointer]) ?>">
 

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/Exam.css">
     <script type="module" src="/js/Exam.index.js"></script>
-    <title>Exam | </title>
+    <title>Exam | <?= $exam->title ?></title>
 </head>
 <body>
 
