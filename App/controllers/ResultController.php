@@ -2,17 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Models\Exam;
+use App\Models\Result;
 use Framework\Database;
+use Framework\Sorter;
 
 class ResultController {
 
     protected Database $db;
+    protected $examModel;
+    protected $resultModel;
 
     public function __construct() {
 
         $config = require basePath("config/db.php");
 
         $this->db = new Database($config);
+        $this->examModel = new Exam($this->db);
+        $this->resultModel = new Result($this->db);
 
     }
 
@@ -38,10 +45,13 @@ class ResultController {
      * Submit an exam
      * 
      */
-    public function store($key) {
+    public function store($params) {
 
-        inspect($_POST, false);
-
+        
+        $examDetails = $this->examModel->find($params["key"], "exam_key");
+        
+        $answers = Sorter::submittedAnswers($_POST);
+        inspect($answers);
         
         loadView("exams/finish");
     }

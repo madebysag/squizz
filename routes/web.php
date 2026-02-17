@@ -12,12 +12,12 @@ $router->post("/exams/write", "ExamController@checkKey", ["student"]); //  Where
 
 $router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exam
 
-$router->get("/exams/users/results", "ResultController@showAll", ["student", "tutor"]); //  Show results for all exam taken by student #
-$router->get("/exams/users/results/{key}", "ResultController@show", ["student"]); //  Show results for a particular exam taken by student #
+$router->get("/exams/results", "ResultController@showAll", ["student", "tutor"]); //  Show results for all exam taken by student #
+$router->get("/exams/results/{key}", "ResultController@show", ["student"]); //  Show results for a particular exam taken by student #
 
-$router->put("/exams/users/results/{key}", "ResultController@update", ["student"]); //  Show results for a particular exam taken by student #
+$router->put("/exams/results/{key}", "ResultController@update", ["student"]); //  Show results for a particular exam taken by student #
 
-$router->post("/exams/users/results", "ResultController@store", ["student"]); //  where reuslts are upload #
+$router->post("/exams/results/{key}", "ResultController@store", ["student"]); //  where reuslts are upload #
 
 $router->get("auth/users/register", "UserController@create", ["org"]); //  show Form where new user(student / tutor) or tutor are created # 
 $router->get("auth/users/login", "UserController@login", ["guest"]); //  show user(student / tutor) Login form # 

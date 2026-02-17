@@ -34,7 +34,7 @@
 
     <main>
 
-        <form action="/exams/users/results" method="POST">
+        <form action="/exams/results/<?= $exam->exam_key ?>" method="POST">
             
             <?= loadPartial("questions", [
                 "exam" => $exam,

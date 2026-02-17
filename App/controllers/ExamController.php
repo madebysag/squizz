@@ -162,7 +162,7 @@ class ExamController {
         // SELECT questions.body, answers.body, answers.id, questions.id, exams.id FROM ((`exams` JOIN questions ON 1 = questions.exam_id) JOIN answers ON questions.id = answers.question_id)
         
         $fullExam = $this->examModel->load($examDetails->id);
-        $sortedExam = Sorter::buildQuestions($fullExam);
+        $sortedExam = Sorter::buildQuestionsToShow($fullExam);
 
         loadView("exams/show", [
             "exam" => $examDetails,

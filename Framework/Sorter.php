@@ -6,7 +6,7 @@ use Framework\Sorting\Question;
 use Framework\Sorting\Answer;
 
 /**
- * Sort and arrange questions, answersand meta data submited
+ * Sort and arrange questions, answers and meta data submited
  */
 
 class Sorter {
@@ -46,7 +46,7 @@ class Sorter {
      *              |       |-------body
      *           
      */
-    public static function buildQuestions($fullExamData) {
+    public static function buildQuestionsToShow($fullExamData) {
         $sortedQuestions = [];
         
         foreach ($fullExamData as $answerDetails) {
@@ -84,5 +84,20 @@ class Sorter {
 
 
         return $sortedQuestions; 
+    }
+
+    /**
+     * Arrange answer submited from exam
+     */
+    public static function submittedAnswers($submittedArray) {
+
+        $sortedArray = [];
+
+        foreach($submittedArray as $key => $value) {
+            if (str_contains($key, "q")) 
+                $sortedArray[$key] = $value;
+        }
+
+        return $sortedArray;
     }
 }

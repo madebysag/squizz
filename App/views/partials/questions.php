@@ -3,7 +3,7 @@ $pointer = 0;
 
 $options = [];
 /**
- * Added the $exam->created_at unix timestamp divided 1000 to the values, for obfuscation purposes
+ * Added the $exam->created_at unix timestamp minus 1_000_000 to the values, for obfuscation purposes
  * 
  * Correct options are ID + $buffer
  * 
