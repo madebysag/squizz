@@ -1,3 +1,7 @@
+<?php
+
+use Framework\Session;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +13,15 @@
 </head>
 <body>
     <main>
-        <p class="text-lg text-condensed">Welldone!</p>
+        <p class="text-lg text-condensed">Welldone! <?= Session::get("user")["name"] ?></p>
         <p class="text-sm">You scored</p>
-        <p class="text-xxl">84%</p>
+        <p class="text-xxl"><?= $score ?></p>
         <p class="text-sm">Breakdown</p>
-        <p class="text-md">+<span class="correct">84</span> correct answers</p>
-        <p class="text-md">-<span class="wrong">10</span> wrong answers</p>
-        <p class="text-md">-<span class="wrong">6</span> unattempted questions</p>
+        <p class="text-md">+<span class="correct"><?= $correct ?></span> correct answers</p>
+        <p class="text-md">-<span class="wrong"><?= $wrong ?></span> wrong answers</p>
+        <p class="text-md">-<span class="wrong">NULL yet lol</span> unattempted questions</p>
         <div>
-            <a class="btn-primary"><- Home Page</a>
+            <a class="btn-primary" href="/"><< Home Page</a>
         </div>
     </main>
 </body>

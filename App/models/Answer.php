@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Base\Model;
+use Framework\Session;
 
 class Answer extends Model{
 
@@ -66,6 +67,25 @@ class Answer extends Model{
         $queryValuesString = trim($queryValuesString, ",");
         
         $this->db->query("INSERT INTO `answers` (is_correct, question_id, body) VALUES {$queryValuesString}", $params, false);
+    }
+
+    public function findManyAnswers(array $ids, $buffer) {
+        $queryValuesString = "";
+        $params = [];
+
+        foreach($ids as $key => $value) {
+            $value = $value - $buffer;
+
+            if ($value == "0") // Means a fabricated option
+                continue;
+            
+            $params[] = $value;
+            $queryValuesString .= "?,";
+        }
+
+        $queryValuesString = trim($queryValuesString, ",");
+
+        return $this->db->query("SELECT * FROM `answers` WHERE id IN ({$queryValuesString});", $params, false)->fetchAll();
     }
 
 }

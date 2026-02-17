@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\Answer;
 use App\Models\Exam;
 use App\Models\Result;
 use Framework\Database;
+use Framework\Scoring;
 use Framework\Sorter;
 
 class ResultController {
@@ -12,6 +14,7 @@ class ResultController {
     protected Database $db;
     protected $examModel;
     protected $resultModel;
+    protected $answerModel;
 
     public function __construct() {
 
@@ -20,6 +23,7 @@ class ResultController {
         $this->db = new Database($config);
         $this->examModel = new Exam($this->db);
         $this->resultModel = new Result($this->db);
+        $this->answerModel = new Answer($this->db);
 
     }
 
@@ -47,13 +51,23 @@ class ResultController {
      */
     public function store($params) {
 
-        
         $examDetails = $this->examModel->find($params["key"], "exam_key");
+
+        /**
+         * Retriving the buffer added to options Values (i.e the IDs) in views/partials/questions.php 
+         */
+        $buffer = strtotime($examDetails->created_at) - 1_000_000;
         
         $answers = Sorter::submittedAnswers($_POST);
-        inspect($answers);
+        $answersInfo = $this->answerModel->findManyAnswers($answers, $buffer);
+
+        [$score, $correct, $wrong ]= Scoring::score($answersInfo, $examDetails->questions_count);
         
-        loadView("exams/finish");
+        loadView("exams/finish", [
+            "score" => $score,
+            "correct" => $correct,
+            "wrong" => $wrong,
+        ]);
     }
 
 

@@ -1,15 +1,20 @@
 <?php
+
+use Framework\Session;
+
 $pointer = 0;
 
 $options = [];
+
 /**
- * Added the $exam->created_at unix timestamp minus 1_000_000 to the values, for obfuscation purposes
+ * Added the $exam->created_at unix timestamp minus 1_000_000 to the option values, for obfuscation purposes
  * 
  * Correct options are ID + $buffer
  * 
  * Incorrect options are $buffers only
  * 
  * this solves the issue of null values for fabricated wrong options
+ * 
  */
 
 $buffer = strtotime($exam->created_at) - 1_000_000;
