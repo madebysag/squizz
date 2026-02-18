@@ -28,7 +28,7 @@ class HomeController {
 
         $exams = $this->examModel->findMany("public", "accessibility");
 
-        $error = "";
+        $error = null;
 
         // If no exam found
         if (!$exams)    $error = "No public exam at the moment!";
