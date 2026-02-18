@@ -12,7 +12,7 @@ $router->post("/exams/write", "ExamController@checkKey", ["student"]); //  Where
 
 $router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exam
 
-$router->get("/exams/results", "ResultController@showAll", ["student", "tutor"]); //  Show results for all exam taken by student #
+$router->get("/exams/results", "ResultController@showAll", ["user"]); //  Show results for all exam taken by student #
 $router->get("/exams/results/{key}", "ResultController@show", ["student"]); //  Show results for a particular exam taken by student #
 
 $router->put("/exams/results/{key}", "ResultController@update", ["student"]); //  Show results for a particular exam taken by student #
@@ -24,7 +24,7 @@ $router->get("auth/users/login", "UserController@login", ["guest"]); //  show us
 
 $router->post("auth/users/register", "UserController@store", ["org"]);  
 $router->post("auth/users/login", "UserController@authenticate", ["guest"]);  
-$router->post("auth/users/logout", "UserController@logout", ["student", "tutor" ]);  
+$router->post("auth/users/logout", "UserController@logout", ["user"]);  
 
 
 $router->get("auth/organisations/register", "OrganisationController@create", ["guest"]);  

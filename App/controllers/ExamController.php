@@ -152,7 +152,17 @@ class ExamController {
     }
 
     public function list() {
-        loadView("exams/list");
+        $tutor = Session::get("user");
+
+        $examsByTutor = $this->examModel->findMany($tutor["id"], "author_id");
+
+        // inspect($tutor, false);
+        // inspect($examsByTutor, );
+
+        loadView("exams/list", [
+            "tutor" => $tutor,
+            "exams" => $examsByTutor
+        ]);
     }
 
     public function start($params) {

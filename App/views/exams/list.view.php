@@ -9,18 +9,20 @@
 </head>
 <body>
     <header>
-        <p class="text-condensed text-sm">MrQundus</p>
-        <a href="#" class="btn-secondary">Logout</a>
+        <p class="text-condensed text-sm">Sqizz - the best way to quizz!</p>
+        <form action="/auth/users/logout" method="POST">
+            <button type="submit" class="btn-secondary" >Log out</button>
+        </form>
     </header>
     <aside>
-        <button class="btn-primary active">Exams</button>
-        <button class="btn-primary">Results</button>
-        <button class="btn-primary">Reports</button>
+        <a href="/exams/list" class="btn-primary active" disabled >Exams</a>
+        <a href="/exams/results" class="btn-primary">Results</a>
+        <a href="/exams/reports" class="btn-primary text-muted">Reports (comming soon)</a>
     </aside>
     <main>
         <div>
-            <p class="text-md">Welcome, Mr Qundus</p>
-            <a href="#" class="btn-primary">Create Exam</a>
+            <p class="text-md">Welcome, <?= explode(" ", $tutor["name"])[0] ?></p>
+            <a href="/exams/create" class="btn-primary">Create Exam</a>
         </div>
 
         <section class="table">
@@ -36,105 +38,27 @@
                 </div>
             </div>
             <div class="t-body">
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores delectus aspernatur, voluptates veritatis quisquam, saepe voluptatum cupiditate officia illo porro consectetur quam culpa dicta, odit ullam velit excepturi! Blanditiis, distinctio.</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
-                <div class="t-rows">
-                    <div>The Chemistry of the Living and the dead</div>
-                    <div>LIVE</div>
-                    <div><div> 90 <span class="text-muted">questions</span>  <br> 60 <span class="text-muted">minutes</span> </div></div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>12/02/25 <br> 9:30 am</div>
-                    <div>5Ghhfvjopf456</div>
-                    <div><button class="btn-secondary">Edit</button></div>
-                </div>
+
+                <?php foreach($exams as $exam) :?>
+
+                    <div class="t-rows">
+                        <div><?= $exam->title ?></div>
+
+                        <?php if(isExamLive($exam->start_at, $exam->end_at)) : ?>
+                            <div><span class="text-blue">LIVE</span></div>
+                        <?php else : ?>
+                            <div><span class="text-muted">UNALIVE</span></div>
+                        <?php endif; ?>
+
+                        <div><div> <?= $exam->questions_count ?> <span class="text-muted">questions</span>  <br> <?= $exam->duration ?> <span class="text-muted">minutes</span> </div></div>
+                        <div><?= formatDate($exam->start_at, "<br />") ?></div>
+                        <div><?= formatDate($exam->end_at, "<br />") ?></div>
+                        <div><?= $exam->exam_key ?></div>
+                        <div><a href="/exams/<?= $exam->exam_key ?>/edit" class="btn-secondary">Edit</a></div>
+                    </div>
+
+                <?php endforeach; ?>
+                
             </div>
         </section>
 

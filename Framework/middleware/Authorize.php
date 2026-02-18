@@ -40,23 +40,33 @@ class Authorize {
      *  - "guest": Not signed
      *  - "student": signed in as student or teacher only
      *  - "tutor": signed in as teacher only
+     *  - "user": signed in as student or teacher 
      *  - "org": signed in as admin only
      */
     public static function handle(string $role) : void {
 
         if($role === "guest" && (self::isAuthenticated("user", "student") || self::isAuthenticated("user", "tutor") || self::isAuthenticated("admin"))) {
 
+        inspect($role);
             redirect("/");
 
+        } elseif ($role === "user" && (!self::isAuthenticated("user", "student") && !self::isAuthenticated("user", "tutor"))) {
+        inspect($role);
+            
+            redirect("/auth/users/login");
+
         } elseif ($role === "student" && !self::isAuthenticated("user", "student")) {
+        inspect($role);
             
             redirect("/auth/users/login");
             
         } elseif ($role === "tutor" && !self::isAuthenticated("user", "tutor")) {
+        inspect($role);
 
             redirect("/auth/users/login");
             
         } elseif ($role === "org" && !self::isAuthenticated("admin")) {
+        inspect($role);
 
             redirect("/auth/organisations/login");
 

@@ -42,7 +42,7 @@ class ResultController {
      * 
      */
     public function showAll(){
-        
+        inspect("All REsults by user");
     }
 
     /**
