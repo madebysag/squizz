@@ -87,9 +87,10 @@ class ExamController {
     // }
 
     public function create() : void {
+        $user = Session::get("user");
 
         loadView("exams/create", [
-            // "error" => $error
+            "user" => $user
         ]);
     }
     
@@ -151,6 +152,23 @@ class ExamController {
 
     }
 
+    public function edit($params) {
+
+        $user = Session::get("user");
+
+        $examDetails = $this->examModel->find($params["key"], "exam_key");
+        
+        // SELECT questions.body, answers.body, answers.id, questions.id, exams.id FROM ((`exams` JOIN questions ON 1 = questions.exam_id) JOIN answers ON questions.id = answers.question_id)
+        $fullExamQuestions = $this->examModel->load($examDetails->id);
+        $sortedQuestions = Sorter::buildQuestionsToShow($fullExamQuestions);
+
+        loadView("exams/edit", [
+            "user" => $user,
+            "exam" => $examDetails,
+            "questions" => $sortedQuestions
+        ]);
+    }
+
     public function list() {
         $tutor = Session::get("user");
 
@@ -165,6 +183,7 @@ class ExamController {
         ]);
     }
 
+
     public function start($params) {
 
         $examDetails = $this->examModel->find($params["key"], "exam_key");
@@ -177,6 +196,6 @@ class ExamController {
         loadView("exams/show", [
             "exam" => $examDetails,
             "questions" => $sortedExam
-            ]);
+        ]);
     }
 }

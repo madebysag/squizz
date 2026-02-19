@@ -44,6 +44,7 @@ class Sorter {
      *              |-------Answer
      *              |       |-------id
      *              |       |-------body
+     *              |       |-------is_correct
      *           
      */
     public static function buildQuestionsToShow($fullExamData) {
@@ -64,6 +65,7 @@ class Sorter {
                 
                 $newAnswer->id = $answerDetails->answer_id;
                 $newAnswer->body = $answerDetails->answer_body;
+                $newAnswer->is_correct = $answerDetails->is_correct;
                 
                 $newQuestion->answers[] = $newAnswer;
                 $sortedQuestions[] = $newQuestion;
@@ -76,6 +78,7 @@ class Sorter {
 
                 $newAnswer->id = $answerDetails->answer_id;
                 $newAnswer->body = $answerDetails->answer_body;
+                $newAnswer->is_correct = $answerDetails->is_correct;
                 
                 $latestQuestion->answers[] = $newAnswer;
 

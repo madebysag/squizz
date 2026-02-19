@@ -15,7 +15,7 @@ class Exam extends Model{
     }
 
     public function load(int $examId) {
-        return $this->db->query("SELECT questions.id AS question_id, questions.body AS question_body, questions.picture_url, questions.type, answers.id AS answer_id, answers.body AS answer_body, answers.is_correct FROM ((`exams` JOIN questions ON :id = questions.exam_id) JOIN answers ON questions.id = answers.question_id)", ["id" => $examId])->fetchAll();
+        return $this->db->query("SELECT DISTINCT questions.id AS question_id, questions.body AS question_body, questions.picture_url, questions.type, answers.id AS answer_id, answers.body AS answer_body, answers.is_correct FROM ((`exams` JOIN questions ON :id = questions.exam_id) JOIN answers ON questions.id = answers.question_id)", ["id" => $examId])->fetchAll();
     }
 
 

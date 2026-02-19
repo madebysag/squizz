@@ -32,4 +32,5 @@ class Question {
 class Answer {
     public int $id;
     public string $body;
+    public int $is_correct;
 }
