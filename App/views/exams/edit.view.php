@@ -15,7 +15,7 @@
         <a href="/exams/list" class="btn-secondary">Go To Exam List</a>
     </header>
 
-    <form action="/exams" method="POST" >
+    <form action="/exams/<?= $exam->exam_key ?>/edit" method="POST" >
 
         <main>
 
@@ -24,6 +24,8 @@
                 <?php if ($question->type == "T/F") : ?>
 
                     <section class="question-container" id="question_<?= $question->number ?>" data-type="<?= $question->type ?>">
+
+                        <input type="hidden" name="question_id_<?= $question->number ?>" value="<?= $question->id ?>">
 
                         <!-- Questions -->
                         <div class="question">
@@ -53,6 +55,8 @@
 
                         <?php $correctOption = $question->answers[0]->body ?>
                             
+                        <input type="hidden" name="answer_id_<?= $question->number ?>" value="<?= $question->answers[0]->id ?>">
+
                         <div>
                             <span class="text-lg text-muted">T</span>
                             <textarea class="text-md" name="answer_T_<?= $question->number ?>" disabled="">TRUE</textarea>
@@ -74,6 +78,8 @@
                 <?php else : ?>
 
                     <section class="question-container" id="question_<?= $question->number ?>" data-type="<?= $question->type ?>">
+
+                        <input type="hidden" name="question_id_<?= $question->number ?>" value="<?= $question->id ?>">
 
                         <!-- Questions -->
                         <div class="question">
@@ -105,6 +111,9 @@
                             <?php foreach($question->answers as $answer) : ?>
                                 
                                 <div>
+
+                                    <input type="hidden" name="answer_id_<?= $question->number . $option[$counter] ?>" value="<?= $answer->id ?>">
+
                                     <span class="text-lg text-muted"><?= $option[$counter] ?></span>
                                     <textarea class="text-md" name="answer_<?= $option[$counter] . "_" . $question->number ?>"> <?= $answer->body ?> </textarea>
                                     <label class="btn-secondary">
@@ -136,7 +145,8 @@
         
         <?= loadPartial("createExamSideBar", [
             "questions" => $questions,
-            "exam" => $exam
+            "exam" => $exam,
+            "saveRoute" => "/exams/" . $exam->exam_key . "/edit"
         ]) ?>
             
     </form>

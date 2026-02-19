@@ -58,7 +58,7 @@
         <p class="text-condensed text-muted text-sm">Records</p>
         <p class="text-muted text-sm">* Note that Saving does not make the exam go live, it only keep the current records. To go live, use Publish button.</p>
         <button class="btn-secondary" data-action="/exams/delete" >Delete</button>
-        <button type="submit" class="btn-primary" data-action="/exams" >Save</button>
+        <button type="submit" class="btn-primary" data-action="<?= $saveRoute ?>" >Save</button>
     </div>
     
     <div class="actions">

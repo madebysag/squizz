@@ -37,7 +37,7 @@ class ExamController {
     }
 
     /**
-     * Load Exam Login Screen - whereexam screen is entered
+     * Load Exam Login Screen - where exam key is entered
      */
     public function index() : void {
 
@@ -81,11 +81,8 @@ class ExamController {
 
     
     /**
-     * Display Exam instructions
+     * Show exam create page
      */
-    // public function create() : void {
-    // }
-
     public function create() : void {
         $user = Session::get("user");
 
@@ -95,7 +92,7 @@ class ExamController {
     }
     
     /**
-     * Display Exam instructions
+     * Save a new exam with questions
      */
     public function store($params) : void {
 
@@ -152,6 +149,10 @@ class ExamController {
 
     }
 
+
+    /**
+     * Show an exam edit page
+     */
     public function edit($params) {
 
         $user = Session::get("user");
@@ -169,6 +170,72 @@ class ExamController {
         ]);
     }
 
+    /**
+     * Save a new exam with questions
+     */
+    public function update($params) : void {
+
+        $metaData = [];
+        $questions = [];
+        $answers = [];
+        
+        foreach($_POST as $key => $param) {
+
+            if(str_contains($key, "answer")) {
+                $answers[$key] = $param;
+            } else if (str_contains($key, "question")) {
+                $questions[$key] = $param;
+            } else {
+                $metaData[$key] = $param;
+            }
+        }
+        
+        $sortedQuestions = Sorter::sort($questions);
+        $sortedAnswers = Sorter::sort($answers);
+
+        $metaData["author_id"] = Session::get("user")["id"];
+        $metaData["questions_count"] = count($sortedQuestions);
+        $metaData["exam_key"] = $params["key"];
+        
+        // $metaData["exam_key"] = base64_encode(Session::get("user")["name"] . (string) time()); // Name + time created in base 64 is key
+
+        inspect($sortedQuestions, false);
+        inspect($sortedAnswers, false);
+        inspect($metaData);
+
+        try {
+
+            // Begin Transaction
+            $this->db->conn->beginTransaction();
+
+            $this->examModel->save($metaData);
+            
+            $this->examId = $this->examModel->lastInsertId();
+            
+            $this->questionModel->saveMany($sortedQuestions, $this->examId);
+                        
+            $this->firstQuestionId = $this->questionModel->lastInsertId();
+
+            $this->answerModel->saveMany($sortedAnswers, $this->firstQuestionId);
+
+            // Commit Transaction
+            $this->db->conn->commit();
+            
+        } catch (PDOException $e) {
+
+            // RollBack, revert to autocommit mode
+            $this->db->conn->rollback();
+            
+            throw new Exception("Failed to perform Transaction.\nError Message: {$e->getMessage()}");
+        }        
+
+        redirect("/exams/list");
+
+    }
+
+    /**
+     * List all exam by the current user page
+     */
     public function list() {
         $tutor = Session::get("user");
 
@@ -183,7 +250,9 @@ class ExamController {
         ]);
     }
 
-
+    /**
+     * Show exam start page
+     */
     public function start($params) {
 
         $examDetails = $this->examModel->find($params["key"], "exam_key");

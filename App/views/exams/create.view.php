@@ -87,7 +87,9 @@
             </div>
         </main>
         
-        <?= loadPartial("createExamSideBar") ?>
+        <?= loadPartial("createExamSideBar", [
+            "saveRoute" => "/exams"
+        ]) ?>
             
     </form>
 

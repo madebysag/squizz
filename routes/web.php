@@ -1,18 +1,20 @@
 <?php
 
-$router->get("/", "HomeController@index");  //  List all Public exams #
+$router->get("/", "HomeController@index");  //  List all Public exams
 
 $router->get("/exams/write", "ExamController@index", ["student"]); //  Where exam key is entered to take exam  #
-$router->get("/exams/create", "ExamController@create", ["tutor"]); //  show Form where new exams are uploaded # 
-$router->get("/exams/list", "ExamController@list", ["tutor"]); //  Show all exams uploaded by tutor # 
+$router->get("/exams/create", "ExamController@create", ["tutor"]); 
+$router->get("/exams/list", "ExamController@list", ["tutor"]);  
 
-$router->get("/exams/{key}/edit", "ExamController@edit", ["tutor"]); //  Start an exam # 
+$router->get("/exams/{key}/edit", "ExamController@edit", ["tutor"]);  
 
-$router->get("/exams/{key}/start", "ExamController@start", ["student"]); //  Start an exam # 
+$router->get("/exams/{key}/start", "ExamController@start", ["student"]);  
 
-$router->post("/exams/write", "ExamController@checkKey", ["student"]); //  Where exam key is entered to take exam #
+$router->post("/exams/write", "ExamController@checkKey", ["student"]); 
 
 $router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exam
+
+$router->post("/exams/{key}/edit", "ExamController@update", ["tutor"]);  
 
 $router->get("/exams/results", "ResultController@showAll", ["user"]); //  Show results for all exam taken by student #
 $router->get("/exams/results/{key}", "ResultController@show", ["student"]); //  Show results for a particular exam taken by student #
