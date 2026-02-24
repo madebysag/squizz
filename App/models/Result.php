@@ -8,18 +8,14 @@ class Result extends Model {
 
     protected string $tableName = "results";
 
-    public function saveMany(array $questionArray, int $examId) {
+    public function update(array $params) {
         
-        $params = []; 
-
-        $queryValuesString = "";
-
-        $this->db->query("INSERT INTO `questions` (type, body, picture_url, exam_id) VALUES {$queryValuesString}", $params, false);
+        $this->db->query("UPDATE `results` SET (score = :score, correct = :correct, wrong = :wrong, updated_at = CURRENT_TIMESTAMP) WHERE id = :id;", $params);
     }
 
-    public function update($value, $columnName = "id") {
+    public function save(array $params) {
         
-        return $this->db->query("SELECT * FROM `{$this->tableName}` WHERE {$columnName} = :{$columnName};", [ "{$columnName}" => $value]);
+        $this->db->query("INSERT INTO `results` (exam_id, student_id, score, correct, wrong) VALUES (:exam_id, :student_id, :score, :correct, :wrong);", $params);
     }
 
 }

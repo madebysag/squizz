@@ -34,7 +34,7 @@ class Question extends Model {
      * 
      * On a second thought.... editing should be purely changing texts and correct answers, not adding nor deleting questions
      *
-     * The query we are aiming for 
+     * On a third thought... The query we are aiming for 
         UPDATE questions JOIN (VALUES ROW(1, "This boddyyyy", "hhhh"), ROW(2, "WHo might this beeee", "URLLLLS") ) AS new(id, body, picture_url) ON questions.id = new.id SET questions.body = new.body, questions.picture_url = new.picture_url;
 
 

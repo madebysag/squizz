@@ -29,8 +29,6 @@ class Exam extends Model{
         $queryString = trim($queryString, ",");
 
         $this->db->query("UPDATE `exams` SET {$queryString} WHERE `exam_key` = :exam_key;", $params);
-
-        // $this->db->query("UPDATE `exams` WHERE (title, show_author, author_id, course, tags, duration, start_at, end_at, instructions, questions_count, exam_key) VALUES (:title, :show_author, :author_id, :course, :tags, :duration, :start_at, :end_at, :instructions, :questions_count, :exam_key);", $params);
     }
 
     public function load(int $examId) {

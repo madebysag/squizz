@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\Result;
 use Framework\Database;
 use Framework\Scoring;
+use Framework\Session;
 use Framework\Sorter;
 
 class ResultController {
@@ -33,8 +34,14 @@ class ResultController {
      */
     public function show($key) {
 
-   
-        loadView("exams/results");
+        // Fetch result from DB
+
+
+        loadView("results/index", [
+            // "score" => $score,
+            // "correct" => $correct,
+            // "wrong" => $wrong,
+        ]);
     }
 
     /**
@@ -42,8 +49,9 @@ class ResultController {
      * 
      */
     public function showAll(){
-        inspect("All REsults by user");
+        loadView("results/show");
     }
+
 
     /**
      * Submit an exam
@@ -63,7 +71,17 @@ class ResultController {
 
         [$score, $correct, $wrong ]= Scoring::score($answersInfo, $examDetails->questions_count);
         
-        loadView("exams/finish", [
+        // Save result
+        $this->resultModel->save([
+            "exam_id" => $examDetails->id,
+            "student_id" => Session::get("user")["id"],
+            "score" => $score,
+            "correct" => $correct,
+            "wrong" => $wrong
+        ]);
+
+        // Show results
+        loadView("results/index", [
             "score" => $score,
             "correct" => $correct,
             "wrong" => $wrong,

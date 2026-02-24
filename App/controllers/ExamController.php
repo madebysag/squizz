@@ -232,9 +232,6 @@ class ExamController {
 
         $examsByTutor = $this->examModel->findMany($tutor["id"], "author_id");
 
-        // inspect($tutor, false);
-        // inspect($examsByTutor, );
-
         loadView("exams/list", [
             "tutor" => $tutor,
             "exams" => $examsByTutor
