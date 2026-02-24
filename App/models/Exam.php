@@ -11,7 +11,26 @@ class Exam extends Model{
     
     public function save(array $params) {
         
-        return $this->db->query("INSERT INTO `exams` (title, show_author, author_id, course, tags, duration, start_at, end_at, instructions, questions_count, exam_key) VALUES (:title, :show_author, :author_id, :course, :tags, :duration, :start_at, :end_at, :instructions, :questions_count, :exam_key);", $params);
+        $this->db->query("INSERT INTO `exams` (title, show_author, author_id, course, tags, duration, start_at, end_at, instructions, questions_count, exam_key) VALUES (:title, :show_author, :author_id, :course, :tags, :duration, :start_at, :end_at, :instructions, :questions_count, :exam_key);", $params);
+    }
+    
+    public function update(array $params) {
+
+        $queryString = ""; 
+
+        foreach($params as $key => $value) {
+
+            if ($key == "exam_key") continue;
+
+            $queryString .= "`{$key}` = :{$key},";
+            
+        }
+
+        $queryString = trim($queryString, ",");
+
+        $this->db->query("UPDATE `exams` SET {$queryString} WHERE `exam_key` = :exam_key;", $params);
+
+        // $this->db->query("UPDATE `exams` WHERE (title, show_author, author_id, course, tags, duration, start_at, end_at, instructions, questions_count, exam_key) VALUES (:title, :show_author, :author_id, :course, :tags, :duration, :start_at, :end_at, :instructions, :questions_count, :exam_key);", $params);
     }
 
     public function load(int $examId) {

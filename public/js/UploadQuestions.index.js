@@ -4,7 +4,7 @@ class UIController {
         // Grab Elements from the DOM
         this.questions = [...document.querySelectorAll("main .question-container")]
         this.addQuestionContainer = document.querySelector("main .add-question-container")        
-        this.addQuestionBtns = [...this.addQuestionContainer.querySelectorAll("main .add-question-container > button")]
+        this.addQuestionBtns = this.addQuestionContainer ? [...this.addQuestionContainer.querySelectorAll("main .add-question-container > button")] : null;
 
         this.questionLinksContainer = document.querySelector("aside .tabs > #goto")
         
@@ -30,7 +30,7 @@ class UIController {
         });
 
         // Adding Questions
-        this.addQuestionBtns.forEach(btn => {
+        if (this.addQuestionBtns) this.addQuestionBtns.forEach(btn => {
             btn.addEventListener("click", e => {
                 this.addQuestion(btn.dataset.type)
                 
@@ -163,7 +163,7 @@ class UIController {
 
         // Delete Questions
         const deleteBtn = newQuestion.querySelector("button.delete-question") 
-        deleteBtn.addEventListener("click", e => {
+        if (deleteBtn) deleteBtn.addEventListener("click", e => {
             this.removeQuestion(e.target.dataset.id)
             
         })

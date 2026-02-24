@@ -197,33 +197,24 @@ class ExamController {
         $metaData["questions_count"] = count($sortedQuestions);
         $metaData["exam_key"] = $params["key"];
         
-        // $metaData["exam_key"] = base64_encode(Session::get("user")["name"] . (string) time()); // Name + time created in base 64 is key
-
-        inspect($sortedQuestions, false);
-        inspect($sortedAnswers, false);
-        inspect($metaData);
 
         try {
 
             // Begin Transaction
             $this->db->conn->beginTransaction();
 
-            $this->examModel->save($metaData);
-            
-            $this->examId = $this->examModel->lastInsertId();
-            
-            $this->questionModel->saveMany($sortedQuestions, $this->examId);
+            $this->examModel->update($metaData);
                         
-            $this->firstQuestionId = $this->questionModel->lastInsertId();
+            $this->questionModel->updateMany($sortedQuestions);
 
-            $this->answerModel->saveMany($sortedAnswers, $this->firstQuestionId);
+            $this->answerModel->updateMany($sortedAnswers);
 
             // Commit Transaction
             $this->db->conn->commit();
             
         } catch (PDOException $e) {
 
-            // RollBack, revert to autocommit mode
+        //     // RollBack, revert to autocommit mode
             $this->db->conn->rollback();
             
             throw new Exception("Failed to perform Transaction.\nError Message: {$e->getMessage()}");

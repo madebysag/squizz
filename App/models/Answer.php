@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Base\Model;
-use Framework\Session;
+use Framework\Sorter;
 
 class Answer extends Model{
 
@@ -19,12 +19,12 @@ class Answer extends Model{
         return $this->db->query("SELECT * FROM `answers` WHERE `question_id` = :question_id; ", $params)->fetch();
     }
     
-    public function save(array $params) {
+    public function save(array $params) : void {
         
         $this->db->query("INSERT INTO `answers` (body, question_id) VALUES (:body, :question_id)", $params);
     }
 
-    public function saveMany(array $answerArray, int $firstQuestionId) {
+    public function saveMany(array $answerArray, int $firstQuestionId) : void {
 
         $queryValuesString = "";
         $params = [];
@@ -69,7 +69,7 @@ class Answer extends Model{
         $this->db->query("INSERT INTO `answers` (is_correct, question_id, body) VALUES {$queryValuesString}", $params, false);
     }
 
-    public function findManyAnswers(array $ids, $buffer) {
+    public function findManyAnswers(array $ids, $buffer) : array {
         $queryValuesString = "";
         $params = [];
 
@@ -86,6 +86,27 @@ class Answer extends Model{
         $queryValuesString = trim($queryValuesString, ",");
 
         return $this->db->query("SELECT * FROM `answers` WHERE id IN ({$queryValuesString});", $params, false)->fetchAll();
+    }
+
+    public function updateMany($answersArray) : void{
+
+        $params = [];
+
+        foreach($answersArray as $questionNumber => $answers) {
+
+            $sortedAnswers = Sorter::makeAnswersFromArray($answers);
+
+            $params = [...$params, ...$sortedAnswers];
+            
+        }
+
+        
+        $queryValuesString = str_repeat("ROW(?, ?, ?),", count($params) / 3);
+        
+        $queryValuesString = trim($queryValuesString, ",");
+        
+
+        $this->db->query("UPDATE `answers` JOIN( VALUES {$queryValuesString}) AS NEW(id, body, is_correct) ON answers.id = NEW.id SET answers.body = NEW.body, answers.is_correct = NEW.is_correct;", $params, false);
     }
 
 }

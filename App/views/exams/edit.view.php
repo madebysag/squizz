@@ -34,7 +34,6 @@
                                 <span class="text-muted">Question </span>
                                 <b><?= $question->number ?></b>
                             </p>
-                            <button type="button" class="btn-secondary delete-question" data-id="question_<?= $question->number ?>">Delete Question</button>
 
                             <div class="question-body">
                                 <textarea name="question_<?= $question->number ?>" class="text-md"> <?= $question->body ?></textarea>
@@ -88,7 +87,6 @@
                                 <span class="text-muted">Question </span>
                                 <b><?= $question->number ?></b>
                             </p>
-                            <button type="button" class="btn-secondary delete-question" data-id="question_<?= $question->number ?>">Delete Question</button>
 
                             <div class="question-body">
                                 <textarea name="question_<?= $question->number ?>" class="text-md"><?= $question->body ?></textarea>
@@ -133,14 +131,6 @@
 
             <?php endforeach; ?>
             
-
-
-            <div class="actions add-question-container">
-                <p class="text-condensed text-muted text-sm">Add Questions</p>
-                <button type="button" class="btn-secondary" data-type="A-D">Four Options A - D</button>
-                <button type="button" class="btn-secondary" data-type="A-E">Five Options A - E </button>
-                <button type="button" class="btn-secondary" data-type="T/F">True / False</button>
-            </div>
         </main>
         
         <?= loadPartial("createExamSideBar", [

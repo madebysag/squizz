@@ -103,4 +103,52 @@ class Sorter {
 
         return $sortedArray;
     }
+
+    /**
+     * This function is specific for editing exam questions
+     * 
+     * It sorts answers submitted, such that each three item in array represents [id, body, is_correct] of each answer
+     */
+
+    public static function makeAnswersFromArray (array $answerArray ) {
+        $correctAnswerIndex = 0;
+        $plainArray = array_values($answerArray);
+
+        $sortedAnswer = [];
+
+        if (count($plainArray) == 2) { // True or false option
+            
+            $sortedAnswer = [...$plainArray];
+            
+            $sortedAnswer[] = 1;  // is_correct option
+            
+        } else { // for A-D or A-E options
+
+
+            // First get which option is correct, get its index
+            foreach($answerArray as $key => $value) {
+
+                if (str_contains($key, "correct_answer")) break;
+                
+                $correctAnswerIndex++;
+            }
+
+            // Remove the correct answer option from array
+            array_splice($plainArray, $correctAnswerIndex, 1); // unset() also works            
+
+            // Sort answers
+            for ($i = 0; $i < count($plainArray); $i += 2) {
+
+                $sortedAnswer[] = $plainArray[$i];  // id
+                $sortedAnswer[] = $plainArray[$i + 1];  // body
+                $sortedAnswer[] = 0;    // is_correct
+
+            }
+
+            // Change the is_correct bool to true for the right answer - magic numbers comes from keen observation lol
+            $sortedAnswer[($correctAnswerIndex / 2 ) * 3 - 1] = 1;            
+        }
+
+        return $sortedAnswer;
+    }
 }
