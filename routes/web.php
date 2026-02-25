@@ -1,8 +1,8 @@
 <?php
 
-$router->get("/", "HomeController@index");  //  List all Public exams
+$router->get("/", "HomeController@index");
 
-$router->get("/exams/write", "ExamController@index", ["student"]); //  Where exam key is entered to take exam  #
+$router->get("/exams/write", "ExamController@index", ["student"]); 
 $router->get("/exams/create", "ExamController@create", ["tutor"]); 
 $router->get("/exams/list", "ExamController@list", ["tutor"]);  
 
@@ -12,19 +12,19 @@ $router->get("/exams/{key}/start", "ExamController@start", ["student"]);
 
 $router->post("/exams/write", "ExamController@checkKey", ["student"]); 
 
-$router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exam
+$router->post("/exams", "ExamController@store", ["tutor"]);
 
 $router->post("/exams/{key}/edit", "ExamController@update", ["tutor"]);  
 
 $router->get("/exams/results", "ResultController@showAll", ["tutor"]); 
-$router->get("/exams/results/{key}", "ResultController@show", ["user"]); //  Show results for a particular exam taken by student #
+$router->get("/exams/results/{key}", "ResultController@show", ["user"]); 
 
-$router->put("/exams/results/{key}", "ResultController@update", ["student"]); //  Show results for a particular exam taken by student #
+$router->put("/exams/results/{key}", "ResultController@update", ["student"]); 
 
-$router->post("/exams/results/{key}", "ResultController@store", ["student"]); //  where reuslts are upload #
+$router->post("/exams/results/{key}", "ResultController@store", ["student"]); 
 
-$router->get("auth/users/register", "UserController@create", ["org"]); //  show Form where new user(student / tutor) or tutor are created # 
-$router->get("auth/users/login", "UserController@login", ["guest"]); //  show user(student / tutor) Login form # 
+$router->get("auth/users/register", "UserController@create", ["org"]); 
+$router->get("auth/users/login", "UserController@login", ["guest"]);  
 
 $router->post("auth/users/register", "UserController@store", ["org"]);  
 $router->post("auth/users/login", "UserController@authenticate", ["guest"]);  

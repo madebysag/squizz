@@ -9,15 +9,15 @@
 </head>
 <body>
     <header>
-        <p class="text-condensed text-sm"><?= explode(" ", $user["name"])[0] ?></p>
+        <p class="text-condensed text-sm">Welcome back <?= explode(" ", $user["name"])[0] ?>!</p>
 
         <?= loadPartial("logOutBtn") ?>
 
     </header>
     <aside>
-        <button class="btn-primary">Exams</button>
-        <button class="btn-primary active" disabled>Results</button>
-        <button class="btn-primary">Reports</button>
+        <a href="/exams/list" class="btn-primary">Exams</a>
+        <a href="/exams/results" class="btn-primary active" disabled>Results</a>
+        <a href="/exams/reports" class="btn-primary">Reports</a>
     </aside>
     <main>
         <div>
@@ -44,7 +44,7 @@
                 <p class="text-sm">Start Date and Time</p>
             </div>
             <div>
-                <p class="text-lg"><?= formatDate($exam->start_at, " - ") ?></p>    
+                <p class="text-lg"><?= formatDate($exam->end_at, " - ") ?></p>    
                 <p class="text-sm">End Date and Time</p>
             </div>
             <div>
@@ -69,94 +69,17 @@
                 </div>
             </div>
             <div class="t-body">
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
-                <div class="t-rows">
-                    <div>Sulaimon Bin Abdulgafar Bin Yusuf</div>
-                    <div class="text-blue text-lg">84%</div>
-                    <div><div> + <span class="text-blue">84</span> </div></div>
-                    <div><div> - <span class="text-red">6</span> </div></div>
-                    <div><div> - <span class="text-red">10</span> </div></div>
-                    <div>12/02/25 - 9:30 am</div>
-                </div>
+
+                <?php foreach($results as $result) : ?>
+                    <div class="t-rows">
+                        <div><?= $result->name ?></div>
+                        <div class="text-blue text-lg"><?= $result->score ?>%</div>
+                        <div><div> + <span class="text-blue"><?= $result->correct ?></span> </div></div>
+                        <div><div> - <span class="text-red"><?= $result->wrong ?></span> </div></div>
+                        <div><div> - <span class="text-red">null</span> </div></div>
+                        <div><?= formatDate($result->updated_at, " - ") ?></div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </section>
 

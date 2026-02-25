@@ -28,6 +28,7 @@ class Result extends Model {
         
     public function tutorResults(int $exam_id, int $limit = 10) : ?array {
         
-        return $this->findMany($exam_id, "exam_id", $limit);
+        // return $this->findMany($exam_id, "exam_id", $limit);
+        return $this->db->query("SELECT DISTINCT r.score, r.correct, r.wrong, r.updated_at, u.name FROM `results` r INNER JOIN `users` u ON r.student_id = u.id WHERE r.exam_id = :exam_id ORDER BY r.updated_at DESC LIMIT {$limit}", ["exam_id" => $exam_id])->fetchAll();
     }
 }
