@@ -18,4 +18,16 @@ class Result extends Model {
         $this->db->query("INSERT INTO `results` (exam_id, student_id, score, correct, wrong) VALUES (:exam_id, :student_id, :score, :correct, :wrong);", $params);
     }
 
+    /**
+     * Latest Student Result 
+     */
+    public function studentResult(int $student_id) : ?object {
+        
+        return $this->db->query("SELECT * FROM `results` WHERE student_id = :student_id ORDER BY created_at DESC LIMIT 1;", ["student_id" => $student_id])->fetch();
+    }
+        
+    public function tutorResults(int $exam_id, int $limit = 10) : ?array {
+        
+        return $this->findMany($exam_id, "exam_id", $limit);
+    }
 }

@@ -9,48 +9,52 @@
 </head>
 <body>
     <header>
-        <p class="text-condensed text-sm">MrQundus</p>
-        <a href="#" class="btn-secondary">Logout</a>
+        <p class="text-condensed text-sm"><?= explode(" ", $user["name"])[0] ?></p>
+
+        <?= loadPartial("logOutBtn") ?>
+
     </header>
     <aside>
         <button class="btn-primary">Exams</button>
-        <button class="btn-primary active">Results</button>
+        <button class="btn-primary active" disabled>Results</button>
         <button class="btn-primary">Reports</button>
     </aside>
     <main>
         <div>
             <p class="text-md">
-                The Chemistry of the Living and the dead, the dead tell some tales - by Mr Olaken 
+                <?= $exam->title ?> 
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="text-sm text-blue">LIVE</span>
+                <?= loadPartial("isExamLive", [
+                    "exam"=> $exam
+                ]) ?>
             </p>    
         </div>
         
         <div class="text-condensed">
             <div >
-                <p class="text-lg">90</p>    
+                <p class="text-lg"><?= $exam->questions_count ?></p>    
                 <p class="text-sm">questions</p>
             </div>
             <div>
-                <p class="text-lg">60</p>    
+                <p class="text-lg"><?= $exam->duration ?></p>    
                 <p class="text-sm">minutes</p>
             </div>
             <div>
-                <p class="text-lg">10/05/25 - 09:30 am</p>    
+                <p class="text-lg"><?= formatDate($exam->start_at, " - ") ?></p>    
                 <p class="text-sm">Start Date and Time</p>
             </div>
             <div>
-                <p class="text-lg">10/05/25 - 02:30 pm</p>    
+                <p class="text-lg"><?= formatDate($exam->start_at, " - ") ?></p>    
                 <p class="text-sm">End Date and Time</p>
             </div>
             <div>
-                <p class="text-lg">kfj84598LjIHBJ66dK</p>    
+                <p class="text-lg"><?= $exam->exam_key ?></p>    
                 <p class="text-sm">Exam Key</p>
             </div>
         </div>
         <div>
-            <p class="text-md">Tags: Chemistry, Know YOUR SHIT, biology</p>
-            <button class="btn-primary">Edit Exam</button>
+            <p class="text-md">Tags: <?= $exam->tags ?></p>
+            <a href="/exams/<?= $exam->exam_key ?>/edit" class="btn-primary">Edit Exam</a>
         </div>
 
         <section class="table">

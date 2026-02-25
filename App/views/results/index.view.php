@@ -13,7 +13,12 @@ use Framework\Session;
 </head>
 <body>
     <main>
-        <p class="text-lg text-condensed">Welldone! <?= Session::get("user")["name"] ?></p>
+        <p class="text-lg text-condensed">Welldone! <?= explode(" ", $user["name"])[0] ?></p>
+        <div>
+            <p class="text-md">Exam Title</p>
+            <p class="text-lg text-condensed"><?=  $exam->title ?></p>
+
+        </div>
         <p class="text-sm">You scored</p>
         <p class="text-xxl"><?= $score ?></p>
         <p class="text-sm">Breakdown</p>

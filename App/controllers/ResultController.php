@@ -29,15 +29,15 @@ class ResultController {
     }
 
     /**
-     * Show an exams result taken by student 
+     * Show all exams result taken by student 
      * 
      */
-    public function show($key) {
+    public function showAll() {
 
         // Fetch result from DB
 
 
-        loadView("results/index", [
+        loadView("results/list", [
             // "score" => $score,
             // "correct" => $correct,
             // "wrong" => $wrong,
@@ -45,11 +45,48 @@ class ResultController {
     }
 
     /**
-     * Show All exams taken by student or authored by a tutor
+     * Show All results of an exam authored by a tutor if a user is tutor
+     * Show latest result of an exam taken by a student if a user is student
      * 
      */
-    public function showAll(){
-        loadView("results/show");
+    public function show($params){
+
+        // Get current user
+        $user = Session::get("user");
+        
+        if ($user["role"] == "student") {
+
+            $result = $this->resultModel->studentResult($user["id"]);
+
+            if (isset($result)) $exam = $this->examModel->find($result->exam_id);
+
+            else return ErrorController::notFound();
+            
+            loadView("results/index", [
+                "user" => $user,
+                "exam" => $exam,
+                "score" => $result->score,
+                "correct" => $result->correct,
+                "wrong" => $result->wrong
+            ]);
+            
+        } else if($user["role"] == "tutor") {
+
+            $exam = $this->examModel->find($params["key"], "exam_key");
+
+            if (isset($exam)) $results = $this->resultModel->tutorResults($exam->id);
+            
+            loadView("results/show", [
+                "results" => $results,
+                "exam" => $exam,
+                "user" => $user
+            ]);
+            
+        } else {
+
+            ErrorController::forbiddden();
+            
+        }
     }
 
 

@@ -14,10 +14,14 @@
             <?php #inspect($user, false) ?>
             <?php #inspect($admin, false) ?>
             <?php if(isset($user)) : ?>
-
+                
                 <p class="text-condensed text-sm">Hello <?= explode(" ", $user["name"])[0] ?></p>
-
+                
+                
                 <form action="/auth/users/logout" method="POST">
+                    <?php if($user["role"] == "tutor") : ?>
+                        <a href="/exams/list" class="btn-secondary">Exam List</a>
+                    <?php endif; ?>
                     <button type="submit" class="btn-secondary">Log out</button>
                 </form>
 

@@ -16,8 +16,8 @@ $router->post("/exams", "ExamController@store", ["tutor"]);  // Upload a new exa
 
 $router->post("/exams/{key}/edit", "ExamController@update", ["tutor"]);  
 
-$router->get("/exams/results", "ResultController@showAll", ["user"]); //  Show results for all exam taken by student #
-$router->get("/exams/results/{key}", "ResultController@show", ["student"]); //  Show results for a particular exam taken by student #
+$router->get("/exams/results", "ResultController@showAll", ["tutor"]); 
+$router->get("/exams/results/{key}", "ResultController@show", ["user"]); //  Show results for a particular exam taken by student #
 
 $router->put("/exams/results/{key}", "ResultController@update", ["student"]); //  Show results for a particular exam taken by student #
 

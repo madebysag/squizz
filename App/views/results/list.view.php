@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/Exam_List.css">
-    <title>Exam Lists</title>
+    <title>Exam Results</title>
 </head>
 <body>
     <header>
@@ -15,8 +15,8 @@
         
     </header>
     <aside>
-        <a href="/exams/list" class="btn-primary active" disabled >Exams</a>
-        <a href="/exams/results" class="btn-primary">Results</a>
+        <a href="/exams/list" class="btn-primary" >Exams</a>
+        <a href="/exams/results" class="btn-primary active" disabled>Results</a>
         <a href="/exams/reports" class="btn-primary text-muted">Reports (comming soon)</a>
     </aside>
     <main>
@@ -43,18 +43,12 @@
 
                     <div class="t-rows">
                         <div><?= $exam->title ?></div>
-
-                        <?php if(isExamLive($exam->start_at, $exam->end_at)) : ?>
-                            <div><span class="text-blue">LIVE</span></div>
-                        <?php else : ?>
-                            <div><span class="text-muted">UNALIVE</span></div>
-                        <?php endif; ?>
-
+                        <div><?= loadPartial("isExamLive") ?></div>
                         <div><div> <?= $exam->questions_count ?> <span class="text-muted">questions</span>  <br> <?= $exam->duration ?> <span class="text-muted">minutes</span> </div></div>
                         <div><?= formatDate($exam->start_at, "<br />") ?></div>
                         <div><?= formatDate($exam->end_at, "<br />") ?></div>
                         <div><?= $exam->exam_key ?></div>
-                        <div><a href="/exams/<?= $exam->exam_key ?>/edit" class="btn-secondary">Edit</a></div>
+                        <div><a href="/exams/results/<?= $exam->exam_key ?>" class="btn-secondary">Results</a></div>
                     </div>
 
                 <?php endforeach; ?>

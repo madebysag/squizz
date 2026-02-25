@@ -11,4 +11,12 @@ class ErrorController {
             "message" => $message
         ]);
     }
+
+    public static function forbiddden(string $message = "You are unauthorized to access this page!!") : void {
+
+        loadView("error/404", [
+            "status" => 403,
+            "message" => $message
+        ]);
+    }
 }
