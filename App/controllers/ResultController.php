@@ -132,6 +132,6 @@ class ResultController {
      * 
      */
     public function update($key){
-
+        echo "hellooo";
     }
 }

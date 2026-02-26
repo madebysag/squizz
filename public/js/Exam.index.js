@@ -1,4 +1,5 @@
 import { formatedTime } from "./utils.js";
+import Submitter from "./Submitter.js";
 
 class Counter {
     constructor (element, otherElement) {
@@ -231,6 +232,14 @@ timer.init()
 
 const uiController = new UIController()
 
+const submitter = new Submitter(
+    timerElement.dataset.totalMinutes * 60,
+    5,
+    document.querySelector("main > form"),
+    document.getElementById("submitMethod")
+) 
+
+submitter.init();
 
 
 
