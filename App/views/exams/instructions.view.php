@@ -35,7 +35,7 @@
                 </ol>
             </div>
         </div>
-        <a href="/exams/<?= $exam->exam_key ?>/start" class="submit btn-primary">Start Exam <b>>></b></a>
+        <a href="/exams/start/<?= $exam->exam_key ?>" class="submit btn-primary">Start Exam <b>>></b></a>
     </main>
 </body>
 </html>

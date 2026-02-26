@@ -43,18 +43,12 @@
 
                     <div class="t-rows">
                         <div><?= $exam->title ?></div>
-
-                        <?php if(isExamLive($exam->start_at, $exam->end_at)) : ?>
-                            <div><span class="text-blue">LIVE</span></div>
-                        <?php else : ?>
-                            <div><span class="text-muted">UNALIVE</span></div>
-                        <?php endif; ?>
-
+                        <div><?= loadPartial("isExamLive", ["exam" => $exam]) ?></div>
                         <div><div> <?= $exam->questions_count ?> <span class="text-muted">questions</span>  <br> <?= $exam->duration ?> <span class="text-muted">minutes</span> </div></div>
                         <div><?= formatDate($exam->start_at, "<br />") ?></div>
                         <div><?= formatDate($exam->end_at, "<br />") ?></div>
                         <div><?= $exam->exam_key ?></div>
-                        <div><a href="/exams/<?= $exam->exam_key ?>/edit" class="btn-secondary">Edit</a></div>
+                        <div><a href="/exams/<?= $exam->exam_key ?>" class="btn-secondary">Edit</a></div>
                     </div>
 
                 <?php endforeach; ?>

@@ -35,12 +35,13 @@ class ResultController {
     public function showAll() {
 
         // Fetch result from DB
+        $tutor = Session::get("user");
 
+        $examsByTutor = $this->examModel->findMany($tutor["id"], "author_id");
 
         loadView("results/list", [
-            // "score" => $score,
-            // "correct" => $correct,
-            // "wrong" => $wrong,
+            "tutor" => $tutor,
+            "exams" => $examsByTutor
         ]);
     }
 

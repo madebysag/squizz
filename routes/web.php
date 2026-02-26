@@ -6,22 +6,24 @@ $router->get("/exams/write", "ExamController@index", ["student"]);
 $router->get("/exams/create", "ExamController@create", ["tutor"]); 
 $router->get("/exams/list", "ExamController@list", ["tutor"]);  
 
-$router->get("/exams/{key}/edit", "ExamController@edit", ["tutor"]);  
-
-$router->get("/exams/{key}/start", "ExamController@start", ["student"]);  
-
 $router->post("/exams/write", "ExamController@checkKey", ["student"]); 
 
 $router->post("/exams", "ExamController@store", ["tutor"]);
 
-$router->post("/exams/{key}/edit", "ExamController@update", ["tutor"]);  
-
 $router->get("/exams/results", "ResultController@showAll", ["tutor"]); 
+
+$router->get("/exams/{key}", "ExamController@edit", ["tutor"]);  
+
+$router->put("/exams/{key}", "ExamController@update", ["tutor"]);  
+
+$router->get("/exams/start/{key}", "ExamController@start", ["student"]);  
+
 $router->get("/exams/results/{key}", "ResultController@show", ["user"]); 
 
 $router->put("/exams/results/{key}", "ResultController@update", ["student"]); 
 
 $router->post("/exams/results/{key}", "ResultController@store", ["student"]); 
+
 
 $router->get("auth/users/register", "UserController@create", ["org"]); 
 $router->get("auth/users/login", "UserController@login", ["guest"]);  

@@ -17,6 +17,8 @@
 
     <form action="/exams/<?= $exam->exam_key ?>/edit" method="POST" >
 
+        <input type="hidden" name="_method" value="PUT">
+
         <main>
 
             <?php foreach($questions as $question) : ?>

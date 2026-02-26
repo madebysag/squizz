@@ -17,7 +17,7 @@
     <aside>
         <a href="/exams/list" class="btn-primary" >Exams</a>
         <a href="/exams/results" class="btn-primary active" disabled>Results</a>
-        <a href="/exams/reports" class="btn-primary text-muted">Reports (comming soon)</a>
+        <a href="/exams/reports" class="btn-primary text-muted" disabled>Reports (comming soon)</a>
     </aside>
     <main>
         <div>
@@ -43,7 +43,7 @@
 
                     <div class="t-rows">
                         <div><?= $exam->title ?></div>
-                        <div><?= loadPartial("isExamLive") ?></div>
+                        <div><?= loadPartial("isExamLive", ["exam" => $exam]) ?></div>
                         <div><div> <?= $exam->questions_count ?> <span class="text-muted">questions</span>  <br> <?= $exam->duration ?> <span class="text-muted">minutes</span> </div></div>
                         <div><?= formatDate($exam->start_at, "<br />") ?></div>
                         <div><?= formatDate($exam->end_at, "<br />") ?></div>
