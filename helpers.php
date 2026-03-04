@@ -85,6 +85,17 @@ function redirect(string $url) {
 }
 
 /**
+ * Sanitize input from malicious scripts
+ * 
+ * @param string $value
+ * 
+ * @return string;
+ */
+function sanitize($value) {
+    return filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);
+}
+
+/**
  * Format Date coming from Database 
  * 
  * @param string $date;

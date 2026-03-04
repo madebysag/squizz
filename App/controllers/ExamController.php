@@ -102,6 +102,9 @@ class ExamController {
         
         foreach($_POST as $key => $param) {
 
+            // Sanitize input
+            $param = sanitize($param);
+
             if(str_contains($key, "answer")) {
                 $answers[$key] = $param;
             } else if (str_contains($key, "question")) {
@@ -180,6 +183,9 @@ class ExamController {
         $answers = [];
         
         foreach($_POST as $key => $param) {
+
+            // Sanitize input
+            $param = sanitize($param);
 
             if(str_contains($key, "answer")) {
                 $answers[$key] = $param;

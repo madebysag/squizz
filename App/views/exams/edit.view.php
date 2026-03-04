@@ -15,7 +15,7 @@
         <a href="/exams/list" class="btn-secondary">Go To Exam List</a>
     </header>
 
-    <form action="/exams/<?= $exam->exam_key ?>/edit" method="POST" >
+    <form action="/exams/<?= $exam->exam_key ?>" method="POST" >
 
         <input type="hidden" name="_method" value="PUT">
 
@@ -138,7 +138,7 @@
         <?= loadPartial("createExamSideBar", [
             "questions" => $questions,
             "exam" => $exam,
-            "saveRoute" => "/exams/" . $exam->exam_key . "/edit"
+            "saveRoute" => "/exams/" . $exam->exam_key
         ]) ?>
             
     </form>

@@ -10,8 +10,22 @@ class Exam extends Model{
 
     
     public function save(array $params) {
+        $fields = [];
+        $values = [];
+
+        foreach($params as $field => $value) {
+
+            $fields[] = $field; // the query pary
+
+            $values[] = ":" . $field;   // the bound parameters part
+
+            if ($value == "") $params[$field] = null;   // set empty fields to null
+        }
+
+        $fieldsString = implode(", ", $fields);
+        $valuesString = implode(", ", $values);
         
-        $this->db->query("INSERT INTO `exams` (title, show_author, author_id, course, tags, duration, start_at, end_at, instructions, questions_count, exam_key) VALUES (:title, :show_author, :author_id, :course, :tags, :duration, :start_at, :end_at, :instructions, :questions_count, :exam_key);", $params);
+        $this->db->query("INSERT INTO `exams` ({$fieldsString}) VALUES ({$valuesString});", $params);
     }
     
     public function update(array $params) {

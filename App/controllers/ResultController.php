@@ -119,11 +119,7 @@ class ResultController {
         ]);
 
         // Show results
-        loadView("results/index", [
-            "score" => $score,
-            "correct" => $correct,
-            "wrong" => $wrong,
-        ]);
+        redirect("/exams/results/{$params["key"]}");
     }
 
 

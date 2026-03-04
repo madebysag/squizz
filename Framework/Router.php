@@ -53,6 +53,8 @@ class Router {
         // Check if hidden method is set, used for handling PUT and DELETE method
         if ($requestMethod == "POST" && isset($_POST["_method"])) {
             $requestMethod = strtoupper($_POST["_method"]);
+
+            unset($_POST["_method"]);   // Remove the hidden method
         }
 
         $requestSegments = explode("/", trim($uri, "/"));
