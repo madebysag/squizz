@@ -92,7 +92,7 @@ function redirect(string $url) {
  * @return string;
  */
 function sanitize($value) {
-    return filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);
+    return htmlspecialchars(trim($value));
 }
 
 /**

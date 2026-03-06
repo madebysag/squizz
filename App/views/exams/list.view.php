@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/Exam_List.css">
+    <script type="module" src="/js/ExamList.index.js"></script>
     <title>Exam Lists</title>
 </head>
 <body>
@@ -19,6 +20,24 @@
         <a href="/exams/results" class="btn-primary">Results</a>
         <a href="/exams/reports" class="btn-primary text-muted">Reports (comming soon)</a>
     </aside>
+
+    <div class="modal-container">
+        <form class="modal" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <p class="text-condensed text-md">Are you sure you want to delete?</p>
+            <p class="text-lg delete-title">
+                
+            </p>
+            <p class="text-sm">
+                Deletion is permanent and all questions associated will be deleted 
+            </p>
+            <div>
+                <button class="btn-secondary .btn-cancel" type="button">Cancel</button>
+                <button class="btn-secondary text-red" type="submit">Delete</button>
+            </div>
+        </form>
+    </div>
+
     <main>
         <div>
             <p class="text-md">Welcome, <?= explode(" ", $tutor["name"])[0] ?></p>
@@ -48,7 +67,16 @@
                         <div><?= formatDate($exam->start_at, "<br />") ?></div>
                         <div><?= formatDate($exam->end_at, "<br />") ?></div>
                         <div><?= $exam->exam_key ?></div>
-                        <div><a href="/exams/<?= $exam->exam_key ?>" class="btn-secondary">Edit</a></div>
+                        <div>
+                            <a href="/exams/<?= $exam->exam_key ?>" class="btn-secondary">Edit</a>
+                            <button 
+                                class="btn-secondary text-red delete-btn" 
+                                data-key="<?= $exam->exam_key ?>"
+                                data-title="<?= $exam->title ?>"
+                                >
+                                Delete
+                            </button>
+                        </div>
                     </div>
 
                 <?php endforeach; ?>

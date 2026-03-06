@@ -39,7 +39,7 @@
 
             </div>
             <div class="" id="instructions">
-                <label for="exam_instructions" class="text-condensed text-muted text-sm">Please write each instruction on a new line</label>
+                <label for="exam_instructions" class="text-condensed text-muted text-sm">Please write each instruction on a new line starting with a dash "-"</label>
                 <textarea name="instructions" id="exam_instructions"><?= $exam->instructions ?? "" ?></textarea>
             </div>
             <div class="" id="goto">
@@ -56,15 +56,14 @@
     
     <div class="actions">
         <p class="text-condensed text-muted text-sm">Records</p>
-        <p class="text-muted text-sm">* Note that Saving does not make the exam go live, it only keep the current records. To go live, use Publish button.</p>
-        <button class="btn-secondary" data-action="/exams/delete" >Delete</button>
+        <p class="text-muted text-sm">* Note that Saving does not make the exam go live, it only keep the current records. To go live, adjust the exam start and end time to cover exam's period.</p>
         <button type="submit" class="btn-primary" data-action="<?= $saveRoute ?>" >Save</button>
     </div>
     
-    <div class="actions">
+    <!-- <div class="actions">
         <p class="text-condensed text-muted text-sm">Go Live</p>
         <p class="text-muted text-sm">* Publishing will make the exam go live and accessible by student</p>
         <button class="btn-secondary" data-action="/exams/unpublish">Unpublish</button>
         <button class="btn-primary" data-action="/exams/publish" >Publish</button>
-    </div>
+    </div> -->
 </aside>

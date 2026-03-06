@@ -27,4 +27,7 @@ class Model {
         return $this->db->query("SELECT LAST_INSERT_ID();")->fetchColumn();
     }
 
+    public function delete(int $id) {      
+        $this->db->query("DELETE FROM `{$this->tableName}` WHERE id = :id", ["id" => $id]);
+    }
 }

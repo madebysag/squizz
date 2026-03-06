@@ -261,4 +261,15 @@ class ExamController {
             "questions" => $sortedExam
         ]);
     }
+
+    public function delete($params) {
+        
+        $examDetails = $this->examModel->find($params["key"], "exam_key");
+
+        if(!$examDetails) return ErrorController::notFound("Exam does not exists!");
+
+        $this->examModel->delete($examDetails->id);
+
+        redirect("/exams/list");
+    }
 }
