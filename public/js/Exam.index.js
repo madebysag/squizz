@@ -50,7 +50,9 @@ class Counter {
 
 class UIController {
 
-    constructor() {
+    constructor(submitter) {
+
+        this.submitter = submitter
 
         /**Reference Elements from dom */
 
@@ -105,8 +107,15 @@ class UIController {
         })
         
         // Next and Previous Btn
-        this.nextQuestionBtn.addEventListener("click", () => { this.goToNextQuestion() })
-        this.previousQuestionBtn.addEventListener("click", () => { this.goToPreviousQuestion() })
+        this.nextQuestionBtn.addEventListener("click", () => { 
+            this.goToNextQuestion()
+            this.submitter.update()
+        })
+
+        this.previousQuestionBtn.addEventListener("click", () => { 
+            this.goToPreviousQuestion() 
+            this.submitter.update()
+        })
 
         // finished Attepmt        
         this.finishAtemptBackBtn.addEventListener("click", e => {
@@ -230,16 +239,16 @@ const otherTimerElement = document.querySelector(".finish-attempt-container .tim
 const timer = new Counter(timerElement, otherTimerElement)
 timer.init()
 
-const uiController = new UIController()
-
 const submitter = new Submitter(
     timerElement.dataset.totalMinutes * 60,
-    5,
     document.querySelector("main > form"),
-    document.getElementById("submitMethod")
+    true,
+    // 5
 ) 
 
 submitter.init();
+
+const uiController = new UIController(submitter)
 
 
 

@@ -10,6 +10,9 @@ use Framework\Scoring;
 use Framework\Session;
 use Framework\Sorter;
 
+use PDOException;
+use Exception;
+
 class ResultController {
 
     protected Database $db;
@@ -97,27 +100,12 @@ class ResultController {
      */
     public function store($params) {
 
-        $examDetails = $this->examModel->find($params["key"], "exam_key");
+        // Update the result
+        $this->update($params);
 
-        /**
-         * Retriving the buffer added to options Values (i.e the IDs) in views/partials/questions.php 
-         */
-        $buffer = strtotime($examDetails->created_at) - 1_000_000;
+        // Clear session 
+        Session::clear("exam");
         
-        $answers = Sorter::submittedAnswers($_POST);
-        $answersInfo = $this->answerModel->findManyAnswers($answers, $buffer);
-
-        [$score, $correct, $wrong ]= Scoring::score($answersInfo, $examDetails->questions_count);
-        
-        // Save result
-        $this->resultModel->save([
-            "exam_id" => $examDetails->id,
-            "student_id" => Session::get("user")["id"],
-            "score" => $score,
-            "correct" => $correct,
-            "wrong" => $wrong
-        ]);
-
         // Show results
         redirect("/exams/results/{$params["key"]}");
     }
@@ -126,8 +114,107 @@ class ResultController {
     /**
      * Partial submission every 30 seconds
      * 
+     * on a second thought... maybe after clicking next and previous btn
+     * 
      */
-    public function update($key){
-        echo "hellooo";
+    public function update($params){
+
+        // First submission
+        if (!Session::has("exam")) {
+
+            $examDetails = $this->examModel->find($params["key"], "exam_key");
+
+            if (!$examDetails) return;
+
+            /**
+             * Retriving the buffer added to options Values (i.e the IDs) in views/partials/questions.php 
+             */
+            $buffer = strtotime($examDetails->created_at) - 1_000_000;
+            
+            $answers = Sorter::submittedAnswers($_POST);
+
+            // No answers selected
+            if (!$answers) {
+
+                // Set score to zero, others too accordingly
+                [$score, $correct, $wrong ] = [0.0, 0.0, $examDetails->questions_count];
+
+            }  else {
+
+                $answersInfo = $this->answerModel->findManyAnswers($answers, $buffer);
+        
+                [$score, $correct, $wrong ]= Scoring::score($answersInfo, $examDetails->questions_count);
+            }
+            
+            
+            try {
+                
+                $this->db->conn->beginTransaction();
+
+                // Save result
+                $this->resultModel->save([
+                    "exam_id" => $examDetails->id,
+                    "student_id" => Session::get("user")["id"],
+                    "score" => $score,
+                    "correct" => $correct,
+                    "wrong" => $wrong
+                ]);
+
+                $resultRecordId = $this->resultModel->lastInsertId();
+
+                Session::set("exam", [
+                    "id" => $examDetails->id,
+                    "created_at" => $examDetails->created_at,
+                    "questions_count" => $examDetails->questions_count,
+                    "resultId" => $resultRecordId
+                ]);
+
+                //Commit the changes
+                $this->db->conn->commit();
+
+            } catch (PDOException $e) {
+                    
+                // RollBack, revert to autocommit mode
+                $this->db->conn->rollback();
+                
+                throw new Exception("Failed to save result.\nError Message: {$e->getMessage()}");
+            }
+
+            // echo "Saved";
+            
+        } else {    // Subsequent submission
+            
+
+            $created_at = Session::get("exam")["created_at"];
+            $questions_count = Session::get("exam")["questions_count"];            
+            $resultRecordId = Session::get("exam")["resultId"];            
+            
+            /**
+             * Retriving the buffer added to options Values (i.e the IDs) in views/partials/questions.php 
+            */
+            $buffer = strtotime($created_at) - 1_000_000;
+            
+            $answers = Sorter::submittedAnswers($_POST);
+
+            // No answers selected
+            if (!$answers) {
+
+                // Set score to zero, others too accordingly
+                [$score, $correct, $wrong ] = [0.0, 0.0, $questions_count];
+
+            } else {
+
+                $answersInfo = $this->answerModel->findManyAnswers($answers, $buffer);            
+    
+                [$score, $correct, $wrong ]= Scoring::score($answersInfo, $questions_count);
+            }
+
+            $this->resultModel->update([
+                "id" => $resultRecordId,
+                "score" => $score,
+                "correct" => $correct,
+                "wrong" => $wrong
+            ]);
+        }
     }
 }

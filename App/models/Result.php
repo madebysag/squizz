@@ -10,7 +10,7 @@ class Result extends Model {
 
     public function update(array $params) {
         
-        $this->db->query("UPDATE `results` SET (score = :score, correct = :correct, wrong = :wrong, updated_at = CURRENT_TIMESTAMP) WHERE id = :id;", $params);
+        $this->db->query("UPDATE `results` SET score = :score, correct = :correct, wrong = :wrong, updated_at = CURRENT_TIMESTAMP WHERE id = :id;", $params);
     }
 
     public function save(array $params) {
