@@ -1,0 +1,58 @@
+name: binsulaimon-squizz
+
+services:
+  app:
+    build:
+      dockerfile: ./.docker/php/Dockerfile
+    container_name: binsulaimon-squizz-app
+    restart: unless-stopped
+    env_file:
+      - ./public/.env
+    volumes:
+      - ./:/var/www/html
+
+  server:
+    image: nginx:1.29.5-alpine-slim
+    container_name: binsulaimon-squizz-server
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/nginx:/etc/nginx/conf.d
+
+  database:
+    image: mysql:9.6
+    container_name: binsulaimon-squizz-database
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - squizz-data:/var/lib/mysql
+      - ./:/var/www/html
+      - /c/Users/Abdulgafar/Downloads/squizz.sql:/docker-entrypoint-initdb.d/squizz.sql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2-apache
+    container_name: binsulaimon-squizz-phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - database
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: database
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+volumes:
+  squizz-data:
+    labels:
+      application: squizz-database
+      enviroment: production
+    

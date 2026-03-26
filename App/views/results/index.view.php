@@ -20,7 +20,7 @@ use Framework\Session;
 
         </div>
         <p class="text-sm">You scored</p>
-        <p class="text-xxl"><?= $score ?></p>
+        <p class="text-xxl"><?= $score ?>%</p>
         <p class="text-sm">Breakdown</p>
         <p class="text-md">+<span class="correct"><?= $correct ?></span> correct answers</p>
         <p class="text-md">-<span class="wrong"><?= $wrong ?></span> wrong answers</p>
