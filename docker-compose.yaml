@@ -49,6 +49,8 @@ services:
       PMA_HOST: database
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./.docker/phpmyadmin/config.php:/etc/phpmyadmin/config.user.inc.php
 
 volumes:
   squizz-data:
