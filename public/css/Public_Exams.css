@@ -17,7 +17,8 @@ header > .header {
 }
 
 header > .header > div {
-    padding: 1rem;
+    /* padding: 1rem; */
+    display: flex;
 }
 
 header > .search-container {

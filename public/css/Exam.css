@@ -175,7 +175,7 @@ main .question-container > .answers > button {
 }
 
 section.finish-attempt {
-    padding: 15vh 15vw;
+    padding: 5vh 10vw;
     max-width: 1600px;
     margin: 0 auto;
     text-align: center;
@@ -266,6 +266,7 @@ footer > nav {
     header {
         grid-template-columns: 1fr;
         justify-items: stretch;
+        height: 15vh;
     }
 
     header > .timer-container {
@@ -284,7 +285,8 @@ footer > nav {
     main .question-container {
         grid-template-columns: 1fr;
         /* height: calc(100vh - 25vh); */
-        height: 75vh;
+        height: 70vh;
+        top: 15vh;
     }
 
     main .question-container > section.question {
